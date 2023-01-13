@@ -27,6 +27,8 @@ Keeping track of Covid
 - Pandas
 - Tableau
 
+**COVID-19 Open Data**: Covid-19 dataset created by Google. Not updated since September 15th 2022 - but scripts re-used and adapted for this project.
+
 <br/>
 
 # 🪜 Project steps
