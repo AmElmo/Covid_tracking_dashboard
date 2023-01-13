@@ -35,5 +35,6 @@ Keeping track of Covid
 
 ## 1. 💽 Data collection
 
+## 2. 💽 Data consolidation
 
-## 1. 💽 Consolidation in spreadsheet
+## 3. 💽 Tableau setup
