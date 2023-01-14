@@ -35,6 +35,13 @@ Keeping track of Covid
 
 ## 1. 💽 Data collection
 
+We first looked at Google COVID-19 Open-Data (see [here](https://github.com/GoogleCloudPlatform/covid-19-open-data)). It is a very comprehensive project, unfortunately the scripts written by the community to gather data from each national health ministries were not up to date. Contributions stopped on September 13th 2022 and the repository was turned read-only.
+
+
+Main data sources:
+- For cases: https://data.humdata.org/dataset/coronavirus-covid-19-cases-and-deaths
+- For vaccines:
+
 ## 2. 💽 Data consolidation
 
 ## 3. 💽 Tableau setup
