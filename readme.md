@@ -40,7 +40,7 @@ We first looked at Google COVID-19 Open-Data (see [here](https://github.com/Goog
 
 Main data sources:
 - For cases: https://data.humdata.org/dataset/coronavirus-covid-19-cases-and-deaths
-- For vaccines:
+- For vaccines: https://data.humdata.org/dataset/covid-19-vaccinations
 
 ## 2. 💽 Data consolidation
 
