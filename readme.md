@@ -3,7 +3,7 @@
 
 # 🤔 Problem
 
-Keeping track of Covid
+Keeping track of Covid related data is painful. It takes
 
 <p float="left">
   <img src="imgs/sign_language_1.png" width="300" />
@@ -42,6 +42,10 @@ Main data sources:
 - For cases: https://data.humdata.org/dataset/coronavirus-covid-19-cases-and-deaths
 - For vaccines: https://data.humdata.org/dataset/covid-19-vaccinations
 
+We have a script with cron-job that picks up the raw CSV data from the WHO (World Health Organization).
+
 ## 2. 💽 Data consolidation
+
+
 
 ## 3. 💽 Tableau setup
