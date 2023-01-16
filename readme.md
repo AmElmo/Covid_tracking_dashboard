@@ -31,6 +31,7 @@ Keeping track of Covid related data is painful. It takes
 
 <br/>
 
+
 # 🪜 Project steps
 
 ## 1. 💽 Data collection
@@ -39,7 +40,7 @@ We first looked at Google COVID-19 Open-Data (see [here](https://github.com/Goog
 
 
 Main data sources:
-- For cases: https://data.humdata.org/dataset/coronavirus-covid-19-cases-and-deaths
+- For cases and deaths: https://data.humdata.org/dataset/coronavirus-covid-19-cases-and-deaths
 - For vaccines: https://data.humdata.org/dataset/covid-19-vaccinations
 
 We have a script with cron-job that picks up the raw CSV data from the WHO (World Health Organization).
