@@ -39,16 +39,19 @@ Keeping track of Covid related data is painful. It takes
 
 We first looked at Google COVID-19 Open-Data (see [here](https://github.com/GoogleCloudPlatform/covid-19-open-data)). It is a very comprehensive project, unfortunately the scripts written by the community to gather data from each national health ministries were not up to date. Contributions stopped on September 13th 2022 and the repository was turned read-only.
 
-
 Main data sources:
 - For cases and deaths: https://data.humdata.org/dataset/coronavirus-covid-19-cases-and-deaths
 - For vaccines: https://data.humdata.org/dataset/covid-19-vaccinations
 
 We have a script with cron-job that picks up the raw CSV data from the WHO (World Health Organization).
 
-## 2. 💽 Data consolidation
+## 2. 💽 Data consolidation and functions definitions
 
+We used Pandas in Jupyter Notebook to explore the data and build aggregation functions on the raw dataset.
 
+The whole logic was then packaged so we can generate the data we need to feed to Tableau.
+
+A total of xxx functions were created across xxx packages.
 
 
 ## 3. 💽 Tableau setup
