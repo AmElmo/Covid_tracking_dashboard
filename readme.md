@@ -45,7 +45,7 @@ Main data sources:
 
 We have a script with cron-job that picks up the raw CSV data from the WHO (World Health Organization).
 
-## 2. 💽 Data consolidation and functions definitions
+## 2. 🧱 Data consolidation and functions definitions
 
 We used Pandas in Jupyter Notebook to explore the data and build aggregation functions on the raw dataset.
 
@@ -53,5 +53,15 @@ The whole logic was then packaged so we can generate the data we need to feed to
 
 A total of xxx functions were created across xxx packages.
 
+## 3. ⏳ Data flow
 
-## 3. 💽 Tableau setup
+1. We have a CRON job scheduled to pick up the two main csv files from the WHO website every single day at xxx
+
+2. The different packages then run to generate the Google Sheets consolidating the data. Each visualization source is under a separate sheet. The Google Sheet is cleared and re-created every single day.
+
+3. Tableau connects to Google Sheet in order to generate the dashboards.
+
+
+## 4. 📊 Tableau setup
+
+We connect
