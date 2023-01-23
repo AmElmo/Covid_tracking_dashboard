@@ -26,8 +26,9 @@ Keeping track of Covid related data is painful. It takes
 - Python
 - Pandas: for data manipulation and package definition
 - Matplotlib and Seaborn: for pre-visualization in Jupyter Notebook
-- Google Drive API
 - Tableau: for final visualization
+- Google Drive API: to dump aggregated data
+- REST Countries API: to get country info)
 
 **COVID-19 Open Data**: Covid-19 dataset created by Google. Not updated since September 15th 2022 - but scripts re-used and adapted for this project.
 
