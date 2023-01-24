@@ -61,6 +61,8 @@ A total of xxx functions were created across xxx packages.
 
 2. The different packages then run to generate the Google Sheets consolidating the data. Each visualization source is under a separate sheet. The Google Sheet is cleared and re-created every single day.
 
+💡 We picked Google Sheets over a dedicated database (BigQuery or else) because the consolidated data will have relatively low volume of cells (~1m) per sheet. Google Sheet allows for up to 10m cells so we are well within the limits. Performance remains strong.
+
 3. Tableau connects to Google Sheet in order to generate the dashboards.
 
 
