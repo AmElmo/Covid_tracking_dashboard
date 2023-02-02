@@ -6,6 +6,8 @@ import requests
 # Transform CSV to dataframe
 def csv_to_dataframe(csv):
 
+    print("Start conversion...")
+
     data = pd.read_csv(csv)
 
     # Remove first row if description
@@ -18,12 +20,16 @@ def csv_to_dataframe(csv):
     elif 'date' in data.columns:
         data['date'] = pd.to_datetime(data['date'])
 
+    print("Converted CSV to dataframe")
+
     return data
 
 ## Dictionaries loading
 
 # Generate dictionary with country code + population
 def dict_population(data):
+
+    print("Start dictionary...")
 
     country_codes = data['Country_code'].unique()
     dict_population = {}
@@ -39,10 +45,14 @@ def dict_population(data):
         else:
             continue
 
+    print("Country code / Population dictionary created")
+
     return dict_population
 
 # Generate dictionary with country code + country name
 def dictionary_country_code(data):
+
+    print("Start dictionary")
 
     list_codes = data['Country_code'].unique()
     list_countries = data['Country'].unique()
@@ -52,6 +62,8 @@ def dictionary_country_code(data):
     df = pd.DataFrame(dict_codes)
 
     final_dict = dict(zip(df['Country_code'], df["Country"]))
+
+    print("Country code / country name dictionary created")
 
     return final_dict
 
