@@ -22,7 +22,7 @@ def csv_to_dataframe(csv):
 
 ## Dictionaries loading
 
-# Generate dictionaries with country code + population
+# Generate dictionary with country code + population
 def dict_population(data):
 
     country_codes = data['Country_code'].unique()
@@ -41,7 +41,19 @@ def dict_population(data):
 
     return dict_population
 
+# Generate dictionary with country code + country name
+def dictionary_country_code(data):
 
+    list_codes = data['Country_code'].unique()
+    list_countries = data['Country'].unique()
+
+    dict_codes = {'Country_code': list_codes, 'Country': list_countries}
+
+    df = pd.DataFrame(dict_codes)
+
+    final_dict = dict(zip(df['Country_code'], df["Country"]))
+
+    return final_dict
 
 
 ## Country level functions
