@@ -78,7 +78,6 @@ def dictionary_country_code(data):
 ## Country level functions
 
 # Number of cases (last day)
-
 def new_cases_lastday(data, country):
 
     data_country = data[data["Country"] == country]
@@ -86,8 +85,40 @@ def new_cases_lastday(data, country):
 
     return new_cases_last
 
+# Number of deaths (last day)
+def new_deaths_lastday(data,country):
 
+    data_country = data[data["Country"] == country]
+    new_deaths_last = data_country["New_deaths"].iloc[-1]
 
+    return new_deaths_last
+
+# Number of new cases weekly (last 7 days)
+def new_cases_last_7d(data,country):
+
+    pd.set_option('mode.chained_assignment', None)
+
+    data_country = data[data["Country"] == country]
+    new_cases_7d = data_country[["Date_reported", "New_cases"]]
+    new_cases_7d["Last_7_days"] = new_cases_7d["New_cases"].rolling(7).sum()
+
+    new_cases_7d.drop(['New_cases'], axis = 1, inplace = True)
+
+    return new_cases_7d
+
+# Number of new cases weekly (7-day rolling average)
+def new_cases_7d_average(data,country):
+
+    pd.set_option('mode.chained_assignment', None)
+
+    data_country = data[data["Country"] == country]
+    new_cases_7d_average = data_country[["Date_reported", "New_cases"]]
+    new_cases_7d_average["7_days_average"] = new_cases_7d_average["New_cases"].rolling(7).sum() / 7
+    new_cases_7d_average["7_days_average"] = new_cases_7d_average["7_days_average"].round(decimals=2)
+
+    new_cases_7d_average.drop(['New_cases'], axis = 1, inplace = True)
+
+    return new_cases_7d_average
 
 ## Regional level functions
 
