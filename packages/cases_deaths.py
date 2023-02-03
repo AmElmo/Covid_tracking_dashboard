@@ -77,7 +77,14 @@ def dictionary_country_code(data):
 
 ## Country level functions
 
+# Number of cases (last day)
 
+def new_cases_lastday(data, country):
+
+    data_country = data[data["Country"] == country]
+    new_cases_last = data_country["New_cases"].iloc[-1]
+
+    return new_cases_last
 
 
 
