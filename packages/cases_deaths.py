@@ -120,6 +120,34 @@ def new_cases_7d_average(data,country):
 
     return new_cases_7d_average
 
+# Number of new deaths weekly (last 7 days)
+def new_deaths_last_7d(data,country):
+
+    pd.set_option('mode.chained_assignment', None)
+
+    data_country = data[data["Country"] == country]
+    new_deaths_7d = data_country[["Date_reported", "New_deaths"]]
+    new_deaths_7d["Last_7_days"] = new_deaths_7d["New_deaths"].rolling(7).sum()
+
+    new_deaths_7d.drop(['New_deaths'], axis = 1, inplace = True)
+
+    return new_deaths_7d
+
+# Number of new deaths weekly (7-day rolling average)
+def new_deaths_7d_average(data,country):
+
+    pd.set_option('mode.chained_assignment', None)
+
+    data_country = data[data["Country"] == country]
+    new_deaths_7d_average = data_country[["Date_reported", "New_deaths"]]
+    new_deaths_7d_average["7_days_average"] = new_deaths_7d_average["New_deaths"].rolling(7).sum() / 7
+    new_deaths_7d_average["7_days_average"] = new_deaths_7d_average["7_days_average"].round(decimals=2)
+
+    new_deaths_7d_average.drop(['New_deaths'], axis = 1, inplace = True)
+
+    return new_deaths_7d_average
+
+
 ## Regional level functions
 
 
