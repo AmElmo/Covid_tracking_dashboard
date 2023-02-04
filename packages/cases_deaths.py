@@ -175,6 +175,47 @@ def evol_cases_alltime(data,country):
 
     return evolution_new_cases
 
+# Evolution of new deaths (all-time)
+
+def evol_deaths_alltime(data,country):
+    data_country = data[data["Country"] == country]
+    evolution_new_deaths = data_country[["Date_reported", "New_deaths"]]
+    evolution_new_deaths = evolution_new_deaths[evolution_new_deaths["Date_reported"].dt.dayofweek < 5]
+
+    return evolution_new_deaths
+
+# Evolution of cumulative cases (all-time)
+
+def evol_cum_cases(data,country):
+
+    data_country = data[data["Country"] == country]
+    evolution_cumulative_cases = data_country[["Date_reported", "Cumulative_cases"]]
+
+    return evolution_cumulative_cases
+
+# Evolution of cumulative deaths (all-time)
+
+def evol_cum_deaths(data,country):
+    data_country = data[data["Country"] == country]
+    evolution_cumulative_deaths = data_country[["Date_reported", "Cumulative_deaths"]]
+
+    return evolution_cumulative_deaths
+
+# New cases (weekly)
+
+def new_cases_weekly(data,country):
+
+    data_country = data[data["Country"] == country]
+    new_cases_weekly = data_country[["Date_reported", "New_cases"]]
+    new_cases_weekly["Weekly_cases"] = new_cases_weekly.groupby([pd.Grouper(key="Date_reported", freq="W-MON")])["New_cases"].sum()
+
+    new_cases_weekly = new_cases_weekly.groupby([pd.Grouper(key="Date_reported", freq="W-MON")])["New_cases"].sum()
+    new_cases_weekly = new_cases_weekly.to_frame()
+    new_cases_weekly.reset_index(inplace=True)
+    new_cases_weekly = new_cases_weekly.rename(columns={"New_cases": "Weekly_cases"})
+
+    return new_cases_weekly
+
 
 
 ## Regional level functions
