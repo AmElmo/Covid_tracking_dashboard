@@ -147,6 +147,35 @@ def new_deaths_7d_average(data,country):
 
     return new_deaths_7d_average
 
+# Number of cumulative cases (latest)
+
+def cum_cases_latest(data,country):
+
+    data_country = data[data["Country"] == country]
+    cumulative_cases_latest = data_country["Cumulative_cases"].iloc[-1]
+
+    return cumulative_cases_latest
+
+# Number of cumulative deaths (latest)
+
+def cum_deaths_latest(data,country):
+
+    data_country = data[data["Country"] == country]
+    cumulative_deaths_latest = data_country["Cumulative_deaths"].iloc[-1]
+
+    return cumulative_deaths_latest
+
+# Evolution of new cases (all-time)
+
+def evol_cases_alltime(data,country):
+
+    data_country = data[data["Country"] == country]
+    evolution_new_cases = data_country[["Date_reported", "New_cases"]]
+    evolution_new_cases = evolution_new_cases[evolution_new_cases["Date_reported"].dt.dayofweek < 5]
+
+    return evolution_new_cases
+
+
 
 ## Regional level functions
 
