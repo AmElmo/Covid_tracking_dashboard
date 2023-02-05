@@ -216,6 +216,49 @@ def new_cases_weekly(data,country):
 
     return new_cases_weekly
 
+# New deaths (weekly)
+
+def new_deaths_weekly(data,country):
+
+    data_country = data[data["Country"] == country]
+    new_deaths_weekly = data_country[["Date_reported", "New_deaths"]]
+    new_deaths_weekly["Weekly_deaths"] = new_deaths_weekly.groupby([pd.Grouper(key="Date_reported", freq="W-MON")])["New_deaths"].sum()
+
+    new_deaths_weekly = new_deaths_weekly.groupby([pd.Grouper(key="Date_reported", freq="W-MON")])["New_deaths"].sum()
+    new_deaths_weekly = new_deaths_weekly.to_frame()
+    new_deaths_weekly.reset_index(inplace=True)
+    new_deaths_weekly = new_deaths_weekly.rename(columns={"New_deaths": "Weekly_deaths"})
+
+    return new_deaths_weekly
+
+# New cases (weekly % change)
+
+def new_cases_weekly_change(data,country):
+
+    new_cases_week = new_cases_weekly(data,country)
+
+    new_cases_week.drop(new_cases_week.tail(1).index,inplace=True)
+
+    new_cases_week['Percentage_change'] = new_cases_week['Weekly_cases'].pct_change().round(4) * 100
+
+    new_cases_week.drop(['Weekly_cases'], axis=1, inplace=True)
+
+    return new_cases_week
+
+# New deaths (weekly % change)
+
+def new_deaths_weekly_change(data,country):
+
+    new_deaths_week = new_deaths_weekly(data,country)
+
+    new_deaths_week.drop(new_deaths_week.tail(1).index,inplace=True)
+
+    new_deaths_week['Percentage_change'] = new_deaths_week['Weekly_deaths'].pct_change().round(4) * 100
+
+    new_deaths_week.drop(['Weekly_deaths'], axis=1, inplace=True)
+
+    return new_deaths_week
+
 
 
 ## Regional level functions
