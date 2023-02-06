@@ -281,6 +281,13 @@ def top_10_weeks_deaths(data,country):
 
 ## Regional level functions
 
+# Number of cases (last day)
+def new_cases_lastday(data, region):
+
+    data_country = data[data["WHO_region"] == region]
+    new_cases_last = data_country["New_cases"].iloc[-1]
+
+    return new_cases_last
 
 
 
