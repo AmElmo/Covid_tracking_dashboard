@@ -259,7 +259,25 @@ def new_deaths_weekly_change(data,country):
 
     return new_deaths_week
 
+# Top 10 weeks with most new cases
 
+def top_10_weeks_cases(data,country):
+
+    cases_weekly = new_cases_weekly(data,country)
+
+    cases_weekly = cases_weekly.nlargest(10,'Weekly_cases')
+
+    return cases_weekly
+
+# Top 10 weeks with most new deaths
+
+def top_10_weeks_deaths(data,country):
+
+    deaths_weekly = new_deaths_weekly(data,country)
+
+    deaths_weekly = deaths_weekly.nlargest(10,'Weekly_deaths')
+
+    return deaths_weekly
 
 ## Regional level functions
 
