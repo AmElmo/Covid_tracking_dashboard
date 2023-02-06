@@ -74,6 +74,20 @@ def dictionary_country_code(data):
 
     return final_dict
 
+# Generate dictionary of country names + WHO_region
+
+def dictionary_country_region(data):
+    combinations = data[['Country', 'WHO_region']].drop_duplicates()
+
+    dict_codes = {'Country': combinations['Country'], 'WHO_region': combinations['WHO_region']}
+
+    df = pd.DataFrame(dict_codes)
+
+    final_dict = dict(zip(df['Country'], df["WHO_region"]))
+
+    return final_dict
+
+
 
 ## Country level functions
 
@@ -282,12 +296,7 @@ def top_10_weeks_deaths(data,country):
 ## Regional level functions
 
 # Number of cases (last day)
-def new_cases_lastday(data, region):
 
-    data_country = data[data["WHO_region"] == region]
-    new_cases_last = data_country["New_cases"].iloc[-1]
-
-    return new_cases_last
 
 
 
