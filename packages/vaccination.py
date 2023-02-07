@@ -47,3 +47,27 @@ def dictionary_iso_code(data):
     return final_dict
 
 ## Country level functions
+
+# Number of weekly vaccinations per country
+def new_vaccinations_weekly(data,country):
+
+    data_country = data[data["location"] == country]
+    new_vaccinations_weekly = data_country[["date", "daily_vaccinations"]]
+    new_vaccinations_weekly["Weekly_vaccinations"] = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+
+    new_vaccinations_weekly = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+    new_vaccinations_weekly = new_vaccinations_weekly.to_frame()
+    new_vaccinations_weekly.reset_index(inplace=True)
+    new_vaccinations_weekly = new_vaccinations_weekly.rename(columns={"daily_vaccinations": "Weekly_vaccinations"})
+
+    return new_vaccinations_weekly
+
+
+# Total number of vaccinated people per country
+def total_vaccinations_country(data,country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["people_fully_vaccinated"]]
+
+    vaccinations_total = vaccinations_total.iloc[-1][0]
+
+    return vaccinations_total
