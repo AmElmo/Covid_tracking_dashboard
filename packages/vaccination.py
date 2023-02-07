@@ -29,4 +29,21 @@ def dict_population_iso(data):
 
     return dict_population
 
+# Dictionary of iso codes / countries
+
+def dictionary_iso_code(data):
+
+    list_codes = data['iso_code'].unique()
+    list_countries = data['location'].unique()
+
+    dict_codes = {'iso_code': list_codes, 'location': list_countries}
+
+    df = pd.DataFrame(dict_codes)
+
+    final_dict = dict(zip(df['iso_code'], df["location"]))
+
+    final_dict = {x: final_dict[x] for x in final_dict.keys() if len(x) < 4}
+
+    return final_dict
+
 ## Country level functions
