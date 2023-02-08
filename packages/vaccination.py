@@ -71,3 +71,10 @@ def total_vaccinations_country(data,country):
     vaccinations_total = vaccinations_total.iloc[-1][0]
 
     return vaccinations_total
+
+# Total % of vaccinated people per country
+def total_vaccinations_rate_country(data,country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["people_vaccinated_per_hundred"]]
+
+    vaccinations_total = vaccinations_total.iloc[-1][0]
