@@ -384,7 +384,6 @@ def top_15_new_deaths_lastweek(data):
     return top_15_deaths_incidence
 
 # Top 15 countries with highest total incidence of deaths per 100k
-
 def top_15_total_death_incidence(data):
 
     total_deaths_per_100k = {}
