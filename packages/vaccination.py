@@ -86,3 +86,6 @@ def vaccinations_rate_evol_country(data,country):
     vaccinations_total = data_country[["date","people_vaccinated_per_hundred"]]
 
     return vaccinations_total
+
+
+## Global level functions
