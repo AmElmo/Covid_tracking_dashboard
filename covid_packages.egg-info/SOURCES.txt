@@ -1,0 +1,9 @@
+setup.py
+covid_packages/__init__.py
+covid_packages/cases_deaths.py
+covid_packages/vaccination.py
+covid_packages.egg-info/PKG-INFO
+covid_packages.egg-info/SOURCES.txt
+covid_packages.egg-info/dependency_links.txt
+covid_packages.egg-info/not-zip-safe
+covid_packages.egg-info/top_level.txt
