@@ -24,4 +24,4 @@ vc_data = cd.csv_to_dataframe("vaccination_data.csv")
 # Load dictionaries
 
 
-# Run manipulation scripts & push to API
+# Run manipulation scripts & push to Google Sheet API
