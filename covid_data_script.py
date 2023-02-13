@@ -8,12 +8,12 @@ import requests
 ## Cases & Deaths data
 URL = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
 response = requests.get(URL)
-# open("cases_deaths_data.csv", "wb").write(response.content)
+open("cases_deaths_data.csv", "wb").write(response.content)
 
 ## Vaccination data
 URL = "https://covid19.who.int/who-data/vaccination-data.csv"
 response = requests.get(URL)
-# open("vaccination_data.csv", "wb").write(response.content)
+open("vaccination_data.csv", "wb").write(response.content)
 
 # Load data as dataframes
 
@@ -23,7 +23,7 @@ vc_data = cd.csv_to_dataframe("vaccination_data.csv")
 
 # Load dictionaries for cases & deaths
 ## Generate dictionary with country code + population
-dict_code_pop = cd.dict_population(cd_data)
+# dict_code_pop = cd.dict_population(cd_data)
 
 ## Generate dictionary with country code + country name
 dict_code_name = cd.dictionary_country_code(cd_data)
@@ -34,9 +34,14 @@ dict_name_who_region = cd.dictionary_country_region(cd_data)
 # Load dictionaries for vaccination
 
 # Dictionary of iso codes / population (> 300.000)
-dict_iso_pop = vc.dict_population_iso(vc_data)
+# dict_iso_pop = vc.dict_population_iso(vc_data)
 
 # Dictionary of iso codes / countries
 dict_iso_country =vc. dictionary_iso_code(vc_data)
 
 # Run manipulation scripts & push to Google Sheet API
+
+
+print(dict_code_name)
+print(dict_iso_country)
+print(dict_name_who_region)
