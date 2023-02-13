@@ -11,7 +11,7 @@ response = requests.get(URL)
 open("cases_deaths_data.csv", "wb").write(response.content)
 
 ## Vaccination data
-URL = "https://covid19.who.int/who-data/vaccination-data.csv"
+URL = "https://proxy.hxlstandard.org/data.csv?tagger-match-all=on&tagger-01-header=location&tagger-01-tag=%23country%2Bname&tagger-02-header=iso_code&tagger-02-tag=%23country%2Bcode&tagger-03-header=date&tagger-03-tag=%23date&tagger-04-header=total_vaccinations&tagger-04-tag=%23total%2Bvaccinations&tagger-08-header=daily_vaccinations&tagger-08-tag=%23total%2Bvaccinations%2Bdaily&url=https%3A%2F%2Fraw.githubusercontent.com%2Fowid%2Fcovid-19-data%2Fmaster%2Fpublic%2Fdata%2Fvaccinations%2Fvaccinations.csv&header-row=1&dest=data_view&_gl=1*1nmf87q*_ga*MjAyOT"
 response = requests.get(URL)
 open("vaccination_data.csv", "wb").write(response.content)
 
