@@ -3,6 +3,12 @@ from covid_packages import vaccination as vc
 
 import requests
 
+# Variables for Google Sheet API
+
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SAMPLE_SPREADSHEET_ID = '1ESRCmW23Rb69f5mIfBhV_yy1FsC92f4W8AmxglWnClU'
+SAMPLE_RANGE_NAME = 'Sheet1!A2:E'
+
 # Download the 2 files from WHO website
 
 ## Cases & Deaths data
