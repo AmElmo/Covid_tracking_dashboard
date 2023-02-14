@@ -45,8 +45,11 @@ dict_iso_country =vc.dictionary_iso_code(vc_data)
 
 ### Number of cases (last day)
 
+cd.new_cases_lastday(data,country)
 
 ### Number of deaths (last day)
+
+cd.new_deaths_lastday(data,country)
 
 ### Number of new cases weekly (last 7 days)
 cd.new_cases_last_7d(data,country)
