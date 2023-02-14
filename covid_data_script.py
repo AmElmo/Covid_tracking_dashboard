@@ -33,15 +33,10 @@ dict_name_who_region = cd.dictionary_country_region(cd_data)
 
 # Load dictionaries for vaccination
 
-# Dictionary of iso codes / population (> 300.000)
+## Generate dictionary of iso codes / population (> 300.000)
 # dict_iso_pop = vc.dict_population_iso(vc_data)
 
 # Dictionary of iso codes / countries
 dict_iso_country =vc. dictionary_iso_code(vc_data)
 
 # Run manipulation scripts & push to Google Sheet API
-
-
-print(dict_code_name)
-print(dict_iso_country)
-print(dict_name_who_region)
