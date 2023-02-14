@@ -44,9 +44,9 @@ dict_iso_country =vc.dictionary_iso_code(vc_data)
 ## Cases & Deaths
 
 ### Number of cases (last day)
-for name, country in dict_code_name:
+for name, country in dict_code_name.items():
 
-    cd.new_cases_lastday(cd_data,country)
+    data = cd.new_cases_lastday(cd_data,country)
 
 ### Number of deaths (last day)
 
