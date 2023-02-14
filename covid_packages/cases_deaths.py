@@ -77,6 +77,9 @@ def dictionary_country_code(data):
 # Generate dictionary of country names + WHO_region
 
 def dictionary_country_region(data):
+
+    print("Start dictionary")
+
     combinations = data[['Country', 'WHO_region']].drop_duplicates()
 
     dict_codes = {'Country': combinations['Country'], 'WHO_region': combinations['WHO_region']}
@@ -84,6 +87,8 @@ def dictionary_country_region(data):
     df = pd.DataFrame(dict_codes)
 
     final_dict = dict(zip(df['Country'], df["WHO_region"]))
+
+    print("Country name / WHO_region")
 
     return final_dict
 
