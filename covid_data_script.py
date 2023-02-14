@@ -40,3 +40,10 @@ dict_name_who_region = cd.dictionary_country_region(cd_data)
 dict_iso_country =vc.dictionary_iso_code(vc_data)
 
 # Run manipulation scripts & push to Google Sheet API
+
+## Cases & Deaths
+
+### Number of cases (last day)
+
+
+### Number of deaths (last day)
