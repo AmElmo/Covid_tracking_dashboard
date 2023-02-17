@@ -1,5 +1,6 @@
 from covid_packages import cases_deaths as cd
 from covid_packages import vaccination as vc
+from covid_packages import googlesheet_api as gs
 
 import requests
 

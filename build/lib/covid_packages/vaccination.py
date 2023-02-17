@@ -13,6 +13,8 @@ from googleapiclient.errors import HttpError
 # Dictionary of iso codes / population (> 300.000)
 def dict_population_iso(data):
 
+    print("Start dictionary")
+
     country_codes = data['iso_code'].unique()
     dict_population = {}
 
@@ -27,11 +29,15 @@ def dict_population_iso(data):
         else:
             continue
 
+    print("Dictionary of ISO codes / population created")
+
     return dict_population
 
 # Dictionary of iso codes / countries
 
 def dictionary_iso_code(data):
+
+    print("Start dictionary")
 
     list_codes = data['iso_code'].unique()
     list_countries = data['location'].unique()
@@ -43,6 +49,8 @@ def dictionary_iso_code(data):
     final_dict = dict(zip(df['iso_code'], df["location"]))
 
     final_dict = {x: final_dict[x] for x in final_dict.keys() if len(x) < 4}
+
+    print("Dictionary ISO codes / countries created")
 
     return final_dict
 

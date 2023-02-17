@@ -1,6 +1,7 @@
 setup.py
 covid_packages/__init__.py
 covid_packages/cases_deaths.py
+covid_packages/googlesheet_api.py
 covid_packages/vaccination.py
 covid_packages.egg-info/PKG-INFO
 covid_packages.egg-info/SOURCES.txt

@@ -1,7 +1,7 @@
 Metadata-Version: 1.0
 Name: covid-packages
 Version: 0.1
-Summary: Testing installation of Package
+Summary: Package for Covid data script using WHO data
 Home-page: #
 Author: auth
 Author-email: berthomier.julien@gmail.com
