@@ -55,7 +55,7 @@ for code, name in dict_code_name.items():
 
     data = cd.new_cases_lastday(cd_data,name)
 
-    print(data)
+    print(name, data)
 
 ### Number of deaths (last day)
 
