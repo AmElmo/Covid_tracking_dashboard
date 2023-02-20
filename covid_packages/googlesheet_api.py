@@ -93,3 +93,8 @@ def renameSheet(SCOPES, sheetId, newName):
     service = discovery.build('sheets', 'v4', credentials=creds)
 
     batch_update_spreadsheet_request_body = {
+        "properties": {
+                "sheetId": sheetId,
+                "title": newName,
+        }
+    }
