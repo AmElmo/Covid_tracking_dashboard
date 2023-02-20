@@ -27,7 +27,9 @@ def clean_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME):
 
     sheet = service.spreadsheets()
 
-    request = sheet.values().clear(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="Sheet1!1:1000").execute()
+    request = sheet.values().clear(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=SAMPLE_RANGE_NAME).execute()
+
+    print("Cleared sheet")
 
 
 
@@ -56,7 +58,7 @@ def push_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME,VALUES):
     insert_data_option = ''
 
     value_range_body = {
-        "majorDimension": "ROWS",
+        "majorDimension": "COLUMNS",
         "values": VALUES
     }
 

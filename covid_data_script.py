@@ -51,11 +51,16 @@ dict_iso_country =vc.dictionary_iso_code(vc_data)
 ## Cases & Deaths
 
 ### Number of cases (last day)
+
+data = []
+
+gs.clean_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME)
+
 for code, name in dict_code_name.items():
 
-    data = cd.new_cases_lastday(cd_data,name)
+    data.append([[name],[str(cd.new_cases_lastday(cd_data,name))]])
 
-    print(name, data)
+gs.push_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME,data)
 
 ### Number of deaths (last day)
 
@@ -68,6 +73,6 @@ cd.new_cases_last_7d(cd_data,country)
 cd.new_cases_7d_average(cd_data,country)
 
 ### Number of new deaths weekly (last 7 days)
-cd.new_deaths_last_7d(cd_data,country)
+
 
 ### Number of new deaths weekly (7-day rolling average)

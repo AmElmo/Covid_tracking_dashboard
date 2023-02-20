@@ -58,7 +58,7 @@ def push_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME,VALUES):
     insert_data_option = ''
 
     value_range_body = {
-        "majorDimension": "ROWS",
+        "majorDimension": "COLUMNS",
         "values": VALUES
     }
 
