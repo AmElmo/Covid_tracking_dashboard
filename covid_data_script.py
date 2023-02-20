@@ -58,7 +58,7 @@ gs.clean_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME)
 
 for code, name in dict_code_name.items():
 
-    data.append([[name],[str(cd.new_cases_lastday(cd_data,name))]])
+    data.append([name,str(cd.new_cases_lastday(cd_data,name))])
 
 gs.push_sheet_api(SCOPES,SAMPLE_SPREADSHEET_ID,SAMPLE_RANGE_NAME,data)
 
