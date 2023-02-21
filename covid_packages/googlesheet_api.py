@@ -98,3 +98,10 @@ def renameSheet(SCOPES, sheetId, newName):
                 "title": newName,
         }
     }
+
+    request = service.spreadsheets().batchUpdate(spreadsheetId=sheetId, body=batch_update_spreadsheet_request_body)
+    response = request.execute()
+
+    print(response)
+
+    # print(f"Renamed spreadhseet to {newName}")

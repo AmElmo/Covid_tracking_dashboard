@@ -98,3 +98,5 @@ def renameSheet(SCOPES, sheetId, newName):
                 "title": newName,
         }
     }
+
+    print(f"Renamed spreadhseet to {newName}")

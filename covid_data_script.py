@@ -52,7 +52,7 @@ dict_iso_country =vc.dictionary_iso_code(vc_data)
 
 ### Number of cases (last day)
 
-gs.renameSheet(SCOPES,SAMPLE_SPREADSHEET_ID,)
+gs.renameSheet(SCOPES,SAMPLE_SPREADSHEET_ID,"Number of cases (last day)")
 
 data = []
 
