@@ -8,11 +8,7 @@ import requests
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = '1ESRCmW23Rb69f5mIfBhV_yy1FsC92f4W8AmxglWnClU'
-<<<<<<< HEAD
 RANGE_NAME = 'Sheet1!A2:E'
-=======
-SAMPLE_RANGE_NAME = 'Sheet1!A2:E'
->>>>>>> e10a2ee10bbd82ebbf81181570833da899b8819c
 
 # Download the 2 files from WHO website
 
@@ -57,29 +53,17 @@ dict_iso_country =vc.dictionary_iso_code(vc_data)
 ### Number of cases (last day)
 sheetName = "Number of cases (last day)"
 
-<<<<<<< HEAD
 gs.createSheet(SCOPES,SPREADSHEET_ID,sheetName)
 
 data = []
 
 gs.clean_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME)
-=======
-gs.createSheet(SCOPES,SPREADSHEET_ID,"Number of cases (last day)")
-
-data = []
-
-gs.clean_sheet_api(SCOPES,SPREADSHEET_ID,SAMPLE_RANGE_NAME)
->>>>>>> e10a2ee10bbd82ebbf81181570833da899b8819c
 
 for code, name in dict_code_name.items():
 
     data.append([name,str(cd.new_cases_lastday(cd_data,name))])
 
-<<<<<<< HEAD
 gs.push_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME,data)
-=======
-gs.push_sheet_api(SCOPES,SPREADSHEET_ID,SAMPLE_RANGE_NAME,data)
->>>>>>> e10a2ee10bbd82ebbf81181570833da899b8819c
 
 ### Number of deaths (last day)
 
