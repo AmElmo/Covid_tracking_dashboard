@@ -101,7 +101,11 @@ def createSheet(SCOPES,SPEADSHEET_ID,newName):
             }]
         }
 
+<<<<<<< HEAD
     request = service.spreadsheets().batchUpdate(
+=======
+    request = service.spreadsheets.batchUpdate(
+>>>>>>> e10a2ee10bbd82ebbf81181570833da899b8819c
             spreadsheetId=SPEADSHEET_ID,
             body=request_body
         )
