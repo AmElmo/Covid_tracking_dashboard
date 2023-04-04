@@ -57,13 +57,13 @@ gs.createSheet(SCOPES,SPREADSHEET_ID,sheetName)
 
 data = []
 
-gs.clean_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME)
+gs.clean_sheet_api(SCOPES,SPREADSHEET_ID,f"'{sheetName}'!A2:E")
 
 for code, name in dict_code_name.items():
 
     data.append([name,str(cd.new_cases_lastday(cd_data,name))])
 
-gs.push_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME,data)
+gs.push_sheet_api(SCOPES,SPREADSHEET_ID,f"'{sheetName}'!A2:E",data)
 
 ### Number of deaths (last day)
 

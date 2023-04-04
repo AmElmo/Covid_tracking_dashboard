@@ -10,7 +10,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient import discovery
 
 
-def clean_sheet_api(SCOPES,SPREADSHEET_ID,SAMPLE_RANGE_NAME):
+def clean_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME):
     if os.path.exists('token.json'):
             creds = Credentials.from_authorized_user_file('token.json', SCOPES)
         # If there are no (valid) credentials available, let the user log in.
@@ -29,13 +29,13 @@ def clean_sheet_api(SCOPES,SPREADSHEET_ID,SAMPLE_RANGE_NAME):
 
     sheet = service.spreadsheets()
 
-    request = sheet.values().clear(spreadsheetId=SPREADSHEET_ID, range=SAMPLE_RANGE_NAME).execute()
+    request = sheet.values().clear(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
 
     print("Cleared sheet")
 
 
 
-def push_sheet_api(SCOPES,SPREADSHEET_ID,SAMPLE_RANGE_NAME,VALUES):
+def push_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME,VALUES):
 
     if os.path.exists('token.json'):
             creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -68,7 +68,7 @@ def push_sheet_api(SCOPES,SPREADSHEET_ID,SAMPLE_RANGE_NAME,VALUES):
     sheet = service.spreadsheets()
 
     result = sheet.values().append(spreadsheetId=SPREADSHEET_ID,
-                                    range=SAMPLE_RANGE_NAME, valueInputOption="USER_ENTERED", body=value_range_body).execute()
+                                    range=RANGE_NAME, valueInputOption="USER_ENTERED", body=value_range_body).execute()
 
     print(result)
     print("Data pushed to Google Sheet API")
@@ -101,11 +101,7 @@ def createSheet(SCOPES,SPEADSHEET_ID,newName):
             }]
         }
 
-<<<<<<< HEAD
     request = service.spreadsheets().batchUpdate(
-=======
-    request = service.spreadsheets.batchUpdate(
->>>>>>> e10a2ee10bbd82ebbf81181570833da899b8819c
             spreadsheetId=SPEADSHEET_ID,
             body=request_body
         )
