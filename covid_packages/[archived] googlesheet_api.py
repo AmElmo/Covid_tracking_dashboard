@@ -34,7 +34,6 @@ def clean_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME):
     print("Cleared sheet")
 
 
-
 def push_sheet_api(SCOPES,SPREADSHEET_ID,RANGE_NAME,VALUES):
 
     if os.path.exists('token.json'):
