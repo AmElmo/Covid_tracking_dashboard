@@ -74,8 +74,3 @@ cd.new_cases_last_7d(cd_data,country)
 
 ### Number of new cases weekly (7-day rolling average)
 cd.new_cases_7d_average(cd_data,country)
-
-### Number of new deaths weekly (last 7 days)
-
-
-### Number of new deaths weekly (7-day rolling average)
