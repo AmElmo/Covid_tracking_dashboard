@@ -1,4 +1,5 @@
 from setuptools import setup
+
 setup(name='covid_packages',
 version='0.1',
 description='Package for Covid data script using WHO data',
