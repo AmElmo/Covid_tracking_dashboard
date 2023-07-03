@@ -3,7 +3,7 @@
 
 # 🤔 Problem
 
-Keeping track of Covid related data is painful. It takes
+Keeping track of Covid related data is painful. The raw data is provided by the WHO (World Health Organization). It is a CSV with hundreds of thousands of rows and hundreds of columns. In order to gather insights, you'd have to do a lot of tedious excel work.
 
 <p float="left">
   <img src="imgs/sign_language_1.png" width="300" />
@@ -13,6 +13,8 @@ Keeping track of Covid related data is painful. It takes
 <br/>
 
 # 💡 Solution
+
+This project is scrapping the Covid data from the WHO data sources, crunching it to generate interesting insights and comparisons across countries (stored in a Bigquery database). Then displaying it on beautiful dashboards (using Metabase).
 
  <img src="imgs/sign_language_2.png" width="360" />
 
@@ -24,11 +26,11 @@ Keeping track of Covid related data is painful. It takes
 # 🤖 Stack overview
 
 - Python
-- Pandas: for data manipulation and package definition
-- Matplotlib and Seaborn: for pre-visualization in Jupyter Notebook
-- Google Bigquery: to create the databases
-- Metabase: to visualize the data
-- REST Countries API: to get country info
+- Pandas: for data manipulation and package definition.
+- Matplotlib and Seaborn: for pre-visualization in Jupyter Notebook.
+- Google Bigquery: to create the databases.
+- Metabase: to visualize the data.
+- REST Countries API: to get basic country information.
 
 **COVID-19 Open Data**: Covid-19 dataset created by Google. Not updated since September 15th 2022 - but scripts re-used and adapted for this project.
 
