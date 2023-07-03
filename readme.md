@@ -61,13 +61,14 @@ A total of xxx functions were created across xxx packages.
 
 1. We have a CRON job scheduled to pick up the two main csv files from the WHO website every single day at xxx
 
-2. The different packages then run to generate the Google Sheets consolidating the data. Each visualization source is under a separate sheet. The Google Sheet is cleared and re-created every single day.
+2. The different packages then run to generate the consolidated data. Each visualization source is under a separate database.
 
-💡 We picked Google Sheets over a dedicated database (BigQuery or else) because the consolidated data will have relatively low volume of cells (~1m) per sheet. Google Sheet allows for up to 10m cells so we are well within the limits. Performance remains strong.
-
-3. Tableau connects to Google Sheet in order to generate the dashboards.
+3. Metabase connects to the Bigquery database in order to generate the dashboards.
 
 
-## 4. 📊 Tableau setup
+## 4. 📊 Metabase setup
 
-We connect
+We use the following types of charts to display our insights:
+- ???
+- ???
+- ???
