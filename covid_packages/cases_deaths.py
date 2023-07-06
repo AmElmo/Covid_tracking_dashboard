@@ -93,6 +93,50 @@ def dictionary_country_region(data):
     return final_dict
 
 
+# Dictionary of iso codes / population (> 300.000)
+def dict_population_iso(data):
+
+    print("Start dictionary")
+
+    country_codes = data['iso_code'].unique()
+    dict_population = {}
+
+    for code in country_codes:
+        response = requests.get("https://restcountries.com/v2/alpha/", params={'codes':code})
+
+        # Ignore 404 responses and only include countries with >= 300000 inhabitants
+        if response.status_code == 200 and response.json()[0]['population'] >= 300000:
+            population = response.json()[0]['population']
+            dict_population[code] = population
+            print(code)
+        else:
+            continue
+
+    print("Dictionary of ISO codes / population created")
+
+    return dict_population
+
+# Dictionary of iso codes / countries
+
+def dictionary_iso_code(data):
+
+    print("Start dictionary")
+
+    list_codes = data['iso_code'].unique()
+    list_countries = data['location'].unique()
+
+    dict_codes = {'iso_code': list_codes, 'location': list_countries}
+
+    df = pd.DataFrame(dict_codes)
+
+    final_dict = dict(zip(df['iso_code'], df["location"]))
+
+    final_dict = {x: final_dict[x] for x in final_dict.keys() if len(x) < 4}
+
+    print("Dictionary ISO codes / countries created")
+
+    return final_dict
+
 
 ## Country level functions
 
