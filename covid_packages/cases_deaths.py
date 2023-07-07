@@ -367,7 +367,7 @@ def top_10_weeks_deaths(data,country):
 
 # Top 15 countries with most new cases / 100k today / this week
 
-def top_15_new_cases_lastweek(data):
+def top_15_new_cases_lastweek(data, dictionary_population, dictionary_countrycodes):
 
     pd.options.mode.chained_assignment = None
 
@@ -408,7 +408,7 @@ def top_15_new_cases_lastweek(data):
 
 # Top 15 countries with most new deaths / 100k this week
 
-def top_15_new_deaths_lastweek(data):
+def top_15_new_deaths_lastweek(data, dictionary_population, dictionary_countrycodes):
 
     pd.options.mode.chained_assignment = None
 
@@ -448,7 +448,7 @@ def top_15_new_deaths_lastweek(data):
     return top_15_deaths_incidence
 
 # Top 15 countries with highest total incidence of deaths per 100k
-def top_15_total_death_incidence(data):
+def top_15_total_death_incidence(data, dictionary_population, dictionary_countrycodes):
 
     total_deaths_per_100k = {}
 
