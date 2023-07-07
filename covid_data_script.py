@@ -73,82 +73,91 @@ dict_isocode_countries = dictionary_iso_code(data_vaccination)
 
 new_cases_lastday_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
     new_cases_last = new_cases_lastday(data_cases_deaths, country)
 
     new_cases_lastday_var[country] = new_cases_last
 
+print("-- ✅ Number of cases (last day) for each country --")
+
 # Number of deaths (last day)
 
 new_deaths_lastday_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
     new_deaths_last = new_deaths_lastday(data_cases_deaths, country)
 
     new_deaths_lastday_var[country] = new_deaths_last
 
+print("-- ✅ Number of deaths (last day) for each country --")
 
 # Number of new cases weekly (last 7 days)
 new_cases_last7day_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
     new_cases_last7day = new_cases_last_7d(data_cases_deaths, country)
 
     new_cases_last7day_var[country] = new_cases_last7day
 
+print("-- ✅ Number of new cases weekly (last 7 days) --")
 
 # Number of new cases weekly (7-day rolling average)
 new_cases_last7dayavr_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
     new_cases_last7dayavr = new_cases_7d_average(data_cases_deaths, country)
 
     new_cases_last7dayavr_var[country] = new_cases_last7dayavr
 
+print("-- ✅ Number of new cases weekly (7-day rolling average) --")
 
 # Number of new deaths weekly (last 7 days)
 new_deaths_last7day_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
     new_deaths_last7day = new_deaths_last_7d(data_cases_deaths, country)
 
     new_deaths_last7day_var[country] = new_deaths_last7day
 
+print("-- ✅ Number of new deaths weekly (last 7 days) --")
 
 # Number of new deaths weekly (7-day rolling average)
 new_deaths_last7dayavr_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
     new_deaths_last7dayavr = new_deaths_7d_average(data_cases_deaths, country)
 
     new_deaths_last7dayavr_var[country] = new_deaths_last7dayavr
 
+print("-- ✅ Number of new deaths weekly (7-day rolling average) --")
 
 # Number of cumulative cases (latest)
 cum_cases_latest_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
-    cum_cases_latest = cum_cases_latest(data_cases_deaths, country)
+    cum_caseslatest = cum_cases_latest(data_cases_deaths, country)
 
-    cum_cases_latest_var[country] = cum_cases_latest
+    cum_cases_latest_var[country] = cum_caseslatest
 
+print("-- ✅ Number of cumulative cases (latest) --")
 
 # Number of cumulative deaths (latest)
 cum_deaths_latest_var = {}
 
-for country, pop in dict_country_code_name.items():
+for code, country in dict_country_code_name.items():
 
-    cum_deaths_latest = cum_deaths_latest(data_cases_deaths, country)
+    cum_deathslatest = cum_deaths_latest(data_cases_deaths, country)
 
-    cum_deaths_latest_var[country] = cum_deaths_latest
+    cum_deaths_latest_var[country] = cum_deathslatest
 
+print("-- ✅ Number of cumulative deaths (latest) --")
 
 print("-- Number of cases (last day) for each country --")
 print(new_cases_lastday_var)
@@ -175,45 +184,57 @@ print("-- Number of cumulative deaths (latest) --")
 print(cum_deaths_latest_var)
 
 
-"""
-
 # Evolution of new cases (all-time)
 
-def evol_cases_alltime(data,country):
+evol_cases_alltime_var = {}
 
-    data_country = data[data["Country"] == country]
-    evolution_new_cases = data_country[["Date_reported", "New_cases"]]
-    evolution_new_cases = evolution_new_cases[evolution_new_cases["Date_reported"].dt.dayofweek < 5]
+for code, country in dict_country_code_name.items():
 
-    return evolution_new_cases
+    evol_cases_alltime = evol_cases_alltime(data_cases_deaths, country)
+
+    evol_cases_alltime_var[country] = evol_cases_alltime
+
+print("-- ✅ Evolution of new cases (all-time) --")
 
 # Evolution of new deaths (all-time)
 
-def evol_deaths_alltime(data,country):
-    data_country = data[data["Country"] == country]
-    evolution_new_deaths = data_country[["Date_reported", "New_deaths"]]
-    evolution_new_deaths = evolution_new_deaths[evolution_new_deaths["Date_reported"].dt.dayofweek < 5]
+evol_deaths_alltime_var = {}
 
-    return evolution_new_deaths
+for code, country in dict_country_code_name.items():
+
+    evol_deaths_alltime = evol_deaths_alltime(data_cases_deaths, country)
+
+    evol_deaths_alltime_var[country] = evol_deaths_alltime
+
+print("-- ✅ Evolution of new deaths (all-time) --")
 
 # Evolution of cumulative cases (all-time)
 
-def evol_cum_cases(data,country):
+evol_cum_cases_var = {}
 
-    data_country = data[data["Country"] == country]
-    evolution_cumulative_cases = data_country[["Date_reported", "Cumulative_cases"]]
+for code, country in dict_country_code_name.items():
 
-    return evolution_cumulative_cases
+    evol_cum_cases = evol_cum_cases(data_cases_deaths, country)
+
+    evol_cum_cases_var[country] = evol_cum_cases
+
+print("-- ✅ Evolution of cumulative cases (all-time) --")
 
 # Evolution of cumulative deaths (all-time)
 
-def evol_cum_deaths(data,country):
-    data_country = data[data["Country"] == country]
-    evolution_cumulative_deaths = data_country[["Date_reported", "Cumulative_deaths"]]
+evol_cum_deaths_var = {}
 
-    return evolution_cumulative_deaths
+for code, country in dict_country_code_name.items():
+
+    evol_cum_deaths = evol_cum_deaths(data_cases_deaths, country)
+
+    evol_cum_deaths_var[country] = evol_cum_deaths
+
+print("-- ✅ Evolution of cumulative deaths (all-time) --")
 
 # New cases (weekly)
+
+
 
 def new_cases_weekly(data,country):
 
@@ -270,6 +291,13 @@ def new_deaths_weekly_change(data,country):
     new_deaths_week.drop(['Weekly_deaths'], axis=1, inplace=True)
 
     return new_deaths_week
+
+
+
+
+
+
+"""
 
 # Top 10 weeks with most new cases
 

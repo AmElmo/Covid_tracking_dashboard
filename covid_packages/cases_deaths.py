@@ -165,9 +165,15 @@ def new_cases_last_7d(data,country):
     new_cases_7d = data_country[["Date_reported", "New_cases"]]
     new_cases_7d["Last_7_days"] = new_cases_7d["New_cases"].rolling(7).sum()
 
+    # Keep only the last 7 rows
+    new_cases_7d = new_cases_7d.tail(7)
+
     new_cases_7d.drop(['New_cases'], axis = 1, inplace = True)
 
     return new_cases_7d
+
+# q: why is this functioon returning 1280 rows instead of 7?
+# a:
 
 # Number of new cases weekly (7-day rolling average)
 def new_cases_7d_average(data,country):
@@ -176,12 +182,16 @@ def new_cases_7d_average(data,country):
 
     data_country = data[data["Country"] == country]
     new_cases_7d_average = data_country[["Date_reported", "New_cases"]]
-    new_cases_7d_average["7_days_average"] = new_cases_7d_average["New_cases"].rolling(7).sum() / 7
+    new_cases_7d_average["7_days_average"] = new_cases_7d_average["New_cases"].rolling(7).mean()
     new_cases_7d_average["7_days_average"] = new_cases_7d_average["7_days_average"].round(decimals=2)
+
+    # Filter to last 7 days
+    new_cases_7d_average = new_cases_7d_average.tail(7)
 
     new_cases_7d_average.drop(['New_cases'], axis = 1, inplace = True)
 
     return new_cases_7d_average
+
 
 # Number of new deaths weekly (last 7 days)
 def new_deaths_last_7d(data,country):
@@ -192,19 +202,24 @@ def new_deaths_last_7d(data,country):
     new_deaths_7d = data_country[["Date_reported", "New_deaths"]]
     new_deaths_7d["Last_7_days"] = new_deaths_7d["New_deaths"].rolling(7).sum()
 
+    # Filter to last 7 days
+    new_deaths_7d = new_deaths_7d.tail(7)
+
     new_deaths_7d.drop(['New_deaths'], axis = 1, inplace = True)
 
     return new_deaths_7d
 
 # Number of new deaths weekly (7-day rolling average)
 def new_deaths_7d_average(data,country):
-
     pd.set_option('mode.chained_assignment', None)
 
     data_country = data[data["Country"] == country]
     new_deaths_7d_average = data_country[["Date_reported", "New_deaths"]]
-    new_deaths_7d_average["7_days_average"] = new_deaths_7d_average["New_deaths"].rolling(7).sum() / 7
+    new_deaths_7d_average["7_days_average"] = new_deaths_7d_average["New_deaths"].rolling(7).mean()
     new_deaths_7d_average["7_days_average"] = new_deaths_7d_average["7_days_average"].round(decimals=2)
+
+    # Filter to last 7 days
+    new_deaths_7d_average = new_deaths_7d_average.tail(7)
 
     new_deaths_7d_average.drop(['New_deaths'], axis = 1, inplace = True)
 
