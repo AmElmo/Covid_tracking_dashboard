@@ -347,46 +347,28 @@ for code, country in dict_isocode_countries.items():
 
     total_vaccinations_rate_country_var[country] = total_vaccinationsratecountry
 
+print("-- ✅ Total % of vaccinated people per country --")
 
 # Total % of vaccinated people per country (evolution)
-def vaccinations_rate_evol_country(data,country):
-    data_country = data[data["location"] == country]
-    vaccinations_total = data_country[["date","people_vaccinated_per_hundred"]]
 
-    return vaccinations_total
+vaccinations_rate_evol_country_var = {}
 
+for code, country in dict_isocode_countries.items():
+
+    vaccinationsrateevolcountry = vaccinations_rate_evol_country(data_vaccination, country)
+
+    vaccinations_rate_evol_country_var[country] = vaccinationsrateevolcountry
+
+print("-- ✅ Total % of vaccinated people per country (evolution) --")
 
 ## Global level functions
 
 # Top 15 countries with highest vaccination rate
-def top_15_vaccinations_rate(data):
-    vaccinations_rates = {}
 
-    for code, country in dictionary_population_iso.items():
+top_15_vaccinations_rate_var = top_15_vaccinations_rate(data_vaccination, dict_isocode_population_300k, dict_isocode_countries)
 
-        data_country = data[data["iso_code"] == code]
+print("-- ✅ Top 15 countries with highest vaccination rate --")
 
-        if pd.isna(data_country["people_vaccinated_per_hundred"].iloc[-1]) == False:
-
-            vaccination_rate_latest = data_country["people_vaccinated_per_hundred"].iloc[-1]
-
-        else:
-
-            vaccination_rate_latest = data_country["people_vaccinated_per_hundred"].iloc[-2]
-
-        # Add vaccination rate to dictionary for given country
-        vaccinations_rates[code] = vaccination_rate_latest
-
-    # Sort countries by vaccination rate
-    vaccinations_rates_sorted = dict(sorted(vaccinations_rates.items(), key=lambda x:x[1], reverse=True))
-
-    # Select top 15 countries
-    top_15_vaccination_rates = {key: vaccinations_rates_sorted[key] for key in list(vaccinations_rates_sorted)[:15]}
-
-    # Turn country codes to country names
-    top_15_vaccination_rates = dict((dictionary_isocodes[key], value) for (key, value) in top_15_vaccination_rates.items())
-
-    return top_15_vaccination_rates
 
 
 """
@@ -416,5 +398,7 @@ schema = pandas_gbq.schema.generate_bq_schema(dataframe)
 # Push the dataframe to BigQuery
 table_id = 'your-table-id'
 pandas_gbq.to_gbq(dataframe, f'{dataset_id}.{table_id}', project_id='your-project-id', if_exists='replace', table_schema=schema)
+
+
 
 """

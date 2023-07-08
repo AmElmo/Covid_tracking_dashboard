@@ -99,7 +99,7 @@ def vaccinations_rate_evol_country(data,country):
 ## Global level functions
 
 # Top 15 countries with highest vaccination rate
-def top_15_vaccinations_rate(data):
+def top_15_vaccinations_rate(data, dictionary_population_iso, dictionary_isocodes):
     vaccinations_rates = {}
 
     for code, country in dictionary_population_iso.items():
