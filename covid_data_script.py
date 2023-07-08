@@ -74,8 +74,9 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_cases_last = new_cases_lastday(data_cases_deaths, country)
-    new_cases_last["Country"] = country
-    dataframes.append(new_cases_last)
+    new_cases_last_df = pd.DataFrame({"New_cases_last_day": [new_cases_last], "Country": [country]})
+    new_cases_last_df["Country"] = country
+    dataframes.append(new_cases_last_df)
 
 # Concatenate all DataFrames into a single DataFrame
 new_cases_lastday_df = pd.concat(dataframes)
@@ -91,8 +92,9 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_deaths_last = new_deaths_lastday(data_cases_deaths, country)
-    new_deaths_last["Country"] = country
-    dataframes.append(new_deaths_last)
+    new_deaths_last_df = pd.DataFrame({"New_deaths_last_day": [new_deaths_last], "Country": [country]})
+    new_deaths_last_df["Country"] = country
+    dataframes.append(new_deaths_last_df)
 
 # Concatenate all DataFrames into a single DataFrame
 new_deaths_lastday_df = pd.concat(dataframes)
@@ -107,8 +109,9 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_cases_last7day = new_cases_last_7d(data_cases_deaths, country)
-    new_cases_last7day["Country"] = country
-    dataframes.append(new_cases_last7day)
+    new_cases_last7day_df = pd.DataFrame({"New_cases_last_7d": [new_cases_last7day], "Country": [country]})
+    new_cases_last7day_df["Country"] = country
+    dataframes.append(new_cases_last7day_df)
 
 # Concatenate all DataFrames into a single DataFrame
 new_cases_last7day_df = pd.concat(dataframes)
@@ -123,8 +126,9 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_cases_last7dayavr = new_cases_7d_average(data_cases_deaths, country)
-    new_cases_last7dayavr["Country"] = country
-    dataframes.append(new_cases_last7dayavr)
+    new_cases_last7dayavr_df = pd.DataFrame({"New_cases_last7dayavr": [new_cases_last7dayavr], "Country": [country]})
+    new_cases_last7dayavr_df["Country"] = country
+    dataframes.append(new_cases_last7dayavr_df)
 
 # Concatenate all DataFrames into a single DataFrame
 new_cases_last7dayavr_df = pd.concat(dataframes)
@@ -140,8 +144,9 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_deaths_last7day = new_deaths_last_7d(data_cases_deaths, country)
-    new_deaths_last7day["Country"] = country
-    dataframes.append(new_deaths_last7day)
+    new_deaths_last7day_df = pd.DataFrame({"New_deaths_last7day": [new_deaths_last7day], "Country": [country]})
+    new_deaths_last7day_df["Country"] = country
+    dataframes.append(new_deaths_last7day_df)
 
 # Concatenate all DataFrames into a single DataFrame
 new_deaths_last7day_df = pd.concat(dataframes)
@@ -156,8 +161,9 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_deaths_last7dayavr = new_deaths_7d_average(data_cases_deaths, country)
-    new_deaths_last7dayavr["Country"] = country
-    dataframes.append(new_deaths_last7dayavr)
+    new_deaths_last7dayavr_df = pd.DataFrame({"New_deaths_last7dayavr": [new_deaths_last7dayavr], "Country": [country]})
+    new_deaths_last7dayavr_df["Country"] = country
+    dataframes.append(new_deaths_last7dayavr_df)
 
 # Concatenate all DataFrames into a single DataFrame
 new_deaths_last7dayavr_df = pd.concat(dataframes)
