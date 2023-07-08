@@ -170,4 +170,8 @@ def top_15_vaccinations_rate(data, dictionary_population_iso, dictionary_isocode
     # Turn country codes to country names
     top_15_vaccination_rates = dict((dictionary_isocodes[key], value) for (key, value) in top_15_vaccination_rates.items())
 
-    return top_15_vaccination_rates
+    # Turn to dataframe
+    top_15_vaccination_rates_df = pd.DataFrame(list(top_15_vaccination_rates.items()), columns=['Country', 'Vaccination Rate'])
+
+
+    return top_15_vaccination_rates_df

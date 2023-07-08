@@ -368,14 +368,12 @@ def top_10_weeks_deaths(data,country):
 # Top 15 countries with most new cases / 100k today / this week
 
 def top_15_new_cases_lastweek(data, dictionary_population, dictionary_countrycodes):
-
     pd.options.mode.chained_assignment = None
 
     cases_per_100k = {}
 
     # Iterate over countries
     for code, pop in dictionary_population.items():
-
         # Generate weekly cases for each country
         data_country = data[data["Country_code"] == code]
         new_cases_weekly = data_country[["Date_reported", "New_cases"]]
@@ -396,28 +394,29 @@ def top_15_new_cases_lastweek(data, dictionary_population, dictionary_countrycod
         cases_per_100k[code] = incidence
 
     # Sort countries by incidence
-    cases_per_100k_sorted = dict(sorted(cases_per_100k.items(), key=lambda x:x[1], reverse=True))
+    cases_per_100k_sorted = dict(sorted(cases_per_100k.items(), key=lambda x: x[1], reverse=True))
 
     # Select top 15 countries
     top_15_cases_incidence = {key: cases_per_100k_sorted[key] for key in list(cases_per_100k_sorted)[:15]}
 
     # Turn country codes to country names
-    top_15_cases_incidence = dict((dictionary_countrycodes[key], value) for (key, value) in top_15_cases_incidence.items())
+    top_15_cases_incidence = {dictionary_countrycodes[key]: value for key, value in top_15_cases_incidence.items()}
 
-    return top_15_cases_incidence
+    # Create a DataFrame from the dictionary
+    df = pd.DataFrame(list(top_15_cases_incidence.items()), columns=["Country", "Incidence"])
+
+    return df
 
 # Top 15 countries with most new deaths / 100k this week
 
 def top_15_new_deaths_lastweek(data, dictionary_population, dictionary_countrycodes):
-
     pd.options.mode.chained_assignment = None
 
     deaths_per_100k = {}
 
     # Iterate over countries
     for code, pop in dictionary_population.items():
-
-        # Generate weekly cases for each country
+        # Generate weekly deaths for each country
         data_country = data[data["Country_code"] == code]
         new_deaths_weekly = data_country[["Date_reported", "New_deaths"]]
         new_deaths_weekly["Weekly_deaths"] = new_deaths_weekly.groupby([pd.Grouper(key="Date_reported", freq="W-MON")])["New_deaths"].sum()
@@ -430,30 +429,31 @@ def top_15_new_deaths_lastweek(data, dictionary_population, dictionary_countryco
         # Select the last week
         last_week = new_deaths_weekly['Weekly_deaths'].iloc[-1]
 
-        # Calculate the incidence (cases / 100k people) for the country
+        # Calculate the incidence (deaths / 100k people) for the country
         incidence = (last_week / (pop / 100000))
 
         # Add incidence to dictionary for given country
         deaths_per_100k[code] = incidence
 
     # Sort countries by incidence
-    deaths_per_100k_sorted = dict(sorted(deaths_per_100k.items(), key=lambda x:x[1], reverse=True))
+    deaths_per_100k_sorted = dict(sorted(deaths_per_100k.items(), key=lambda x: x[1], reverse=True))
 
     # Select top 15 countries
     top_15_deaths_incidence = {key: deaths_per_100k_sorted[key] for key in list(deaths_per_100k_sorted)[:15]}
 
     # Turn country codes to country names
-    top_15_deaths_incidence = dict((dictionary_countrycodes[key], value) for (key, value) in top_15_deaths_incidence.items())
+    top_15_deaths_incidence = {dictionary_countrycodes[key]: value for key, value in top_15_deaths_incidence.items()}
 
-    return top_15_deaths_incidence
+    # Create a DataFrame from the dictionary
+    df = pd.DataFrame(list(top_15_deaths_incidence.items()), columns=["Country", "Incidence"])
+
+    return df
 
 # Top 15 countries with highest total incidence of deaths per 100k
 def top_15_total_death_incidence(data, dictionary_population, dictionary_countrycodes):
-
     total_deaths_per_100k = {}
 
     for code, pop in dictionary_population.items():
-
         data_country = data[data["Country_code"] == code]
         cumulative_deaths_latest = data_country["Cumulative_deaths"].iloc[-1]
 
@@ -464,12 +464,15 @@ def top_15_total_death_incidence(data, dictionary_population, dictionary_country
         total_deaths_per_100k[code] = incidence
 
     # Sort countries by incidence
-    deaths_per_100k_sorted = dict(sorted(total_deaths_per_100k.items(), key=lambda x:x[1], reverse=True))
+    deaths_per_100k_sorted = dict(sorted(total_deaths_per_100k.items(), key=lambda x: x[1], reverse=True))
 
     # Select top 15 countries
     top_15_deaths_incidence = {key: deaths_per_100k_sorted[key] for key in list(deaths_per_100k_sorted)[:15]}
 
     # Turn country codes to country names
-    top_15_deaths_incidence = dict((dictionary_countrycodes[key], value) for (key, value) in top_15_deaths_incidence.items())
+    top_15_deaths_incidence = {dictionary_countrycodes[key]: value for key, value in top_15_deaths_incidence.items()}
 
-    return top_15_deaths_incidence
+    # Create a DataFrame from the dictionary
+    df = pd.DataFrame(list(top_15_deaths_incidence.items()), columns=["Country", "Incidence"])
+
+    return df

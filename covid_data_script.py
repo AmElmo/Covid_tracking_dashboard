@@ -1,18 +1,17 @@
 # Import libraries
-
-# Q: give code to import functions from cases_deaths.py and vaccination.py
-# q: how to important all functions from a file?
-# a:
-
 import os
 import pandas as pd
 import numpy as np
 from google.cloud import bigquery
 import pandas_gbq
 import requests
+
+# Import own packages
 from covid_packages.cases_deaths import *
 from covid_packages.vaccination import *
 
+# Set enivronment variables
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "covid-dashboard-378011-d39bea98e1ae.json"
 
 # 1. Fetch data from the web (CRON job). To be pushed in the cloud using Google Cloud Functions
 
@@ -71,213 +70,305 @@ dict_isocode_countries = dictionary_iso_code(data_vaccination)
 
 # Number of cases (last day) for each country
 
-new_cases_lastday_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_cases_last = new_cases_lastday(data_cases_deaths, country)
+    new_cases_last["Country"] = country
+    dataframes.append(new_cases_last)
 
-    new_cases_lastday_var[country] = new_cases_last
+# Concatenate all DataFrames into a single DataFrame
+new_cases_lastday_df = pd.concat(dataframes)
+
+# Reset the index
+new_cases_lastday_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of cases (last day) for each country --")
 
 # Number of deaths (last day)
 
-new_deaths_lastday_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_deaths_last = new_deaths_lastday(data_cases_deaths, country)
+    new_deaths_last["Country"] = country
+    dataframes.append(new_deaths_last)
 
-    new_deaths_lastday_var[country] = new_deaths_last
+# Concatenate all DataFrames into a single DataFrame
+new_deaths_lastday_df = pd.concat(dataframes)
+
+# Reset the index
+new_deaths_lastday_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of deaths (last day) for each country --")
 
 # Number of new cases weekly (last 7 days)
-new_cases_last7day_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_cases_last7day = new_cases_last_7d(data_cases_deaths, country)
+    new_cases_last7day["Country"] = country
+    dataframes.append(new_cases_last7day)
 
-    new_cases_last7day_var[country] = new_cases_last7day
+# Concatenate all DataFrames into a single DataFrame
+new_cases_last7day_df = pd.concat(dataframes)
+
+# Reset the index
+new_cases_last7day_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of new cases weekly (last 7 days) --")
 
 # Number of new cases weekly (7-day rolling average)
-new_cases_last7dayavr_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_cases_last7dayavr = new_cases_7d_average(data_cases_deaths, country)
+    new_cases_last7dayavr["Country"] = country
+    dataframes.append(new_cases_last7dayavr)
 
-    new_cases_last7dayavr_var[country] = new_cases_last7dayavr
+# Concatenate all DataFrames into a single DataFrame
+new_cases_last7dayavr_df = pd.concat(dataframes)
+
+# Reset the index
+new_cases_last7dayavr_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of new cases weekly (7-day rolling average) --")
 
 # Number of new deaths weekly (last 7 days)
-new_deaths_last7day_var = {}
+
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_deaths_last7day = new_deaths_last_7d(data_cases_deaths, country)
+    new_deaths_last7day["Country"] = country
+    dataframes.append(new_deaths_last7day)
 
-    new_deaths_last7day_var[country] = new_deaths_last7day
+# Concatenate all DataFrames into a single DataFrame
+new_deaths_last7day_df = pd.concat(dataframes)
+
+# Reset the index
+new_deaths_last7day_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of new deaths weekly (last 7 days) --")
 
 # Number of new deaths weekly (7-day rolling average)
-new_deaths_last7dayavr_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_deaths_last7dayavr = new_deaths_7d_average(data_cases_deaths, country)
+    new_deaths_last7dayavr["Country"] = country
+    dataframes.append(new_deaths_last7dayavr)
 
-    new_deaths_last7dayavr_var[country] = new_deaths_last7dayavr
+# Concatenate all DataFrames into a single DataFrame
+new_deaths_last7dayavr_df = pd.concat(dataframes)
+
+# Reset the index
+new_deaths_last7dayavr_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of new deaths weekly (7-day rolling average) --")
 
 # Number of cumulative cases (latest)
-cum_cases_latest_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     cum_caseslatest = cum_cases_latest(data_cases_deaths, country)
+    cum_caseslatest["Country"] = country
+    dataframes.append(cum_caseslatest)
 
-    cum_cases_latest_var[country] = cum_caseslatest
+# Concatenate all DataFrames into a single DataFrame
+cum_cases_latest_df = pd.concat(dataframes)
+
+# Reset the index
+cum_cases_latest_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of cumulative cases (latest) --")
 
 # Number of cumulative deaths (latest)
-cum_deaths_latest_var = {}
+
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     cum_deathslatest = cum_deaths_latest(data_cases_deaths, country)
+    cum_deathslatest["Country"] = country
+    dataframes.append(cum_deathslatest)
 
-    cum_deaths_latest_var[country] = cum_deathslatest
+# Concatenate all DataFrames into a single DataFrame
+cum_deaths_latest_df = pd.concat(dataframes)
+
+# Reset the index
+cum_deaths_latest_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of cumulative deaths (latest) --")
 
 
 # Evolution of new cases (all-time)
 
-evol_cases_alltime_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     evol_casesalltime = evol_cases_alltime(data_cases_deaths, country)
+    evol_casesalltime["Country"] = country
+    dataframes.append(evol_casesalltime)
 
-    evol_cases_alltime_var[country] = evol_casesalltime
+# Concatenate all DataFrames into a single DataFrame
+evol_cases_alltime_df = pd.concat(dataframes)
+
+# Reset the index
+evol_cases_alltime_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of new cases (all-time) --")
 
 # Evolution of new deaths (all-time)
 
-evol_deaths_alltime_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     evol_deathsalltime = evol_deaths_alltime(data_cases_deaths, country)
+    evol_deathsalltime["Country"] = country
+    dataframes.append(evol_deathsalltime)
 
-    evol_deaths_alltime_var[country] = evol_deathsalltime
+# Concatenate all DataFrames into a single DataFrame
+evol_deaths_alltime_df = pd.concat(dataframes)
+
+# Reset the index
+evol_deaths_alltime_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of new deaths (all-time) --")
 
 # Evolution of cumulative cases (all-time)
 
-evol_cum_cases_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     evol_cumcases = evol_cum_cases(data_cases_deaths, country)
+    evol_cumcases["Country"] = country
+    dataframes.append(evol_cumcases)
 
-    evol_cum_cases_var[country] = evol_cumcases
+# Concatenate all DataFrames into a single DataFrame
+evol_cum_cases_df = pd.concat(dataframes)
+
+# Reset the index
+evol_cum_cases_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of cumulative cases (all-time) --")
 
 # Evolution of cumulative deaths (all-time)
 
-evol_cum_deaths_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     evol_cumdeaths = evol_cum_deaths(data_cases_deaths, country)
+    evol_cumdeaths["Country"] = country
+    dataframes.append(evol_cumdeaths)
 
-    evol_cum_deaths_var[country] = evol_cumdeaths
+# Concatenate all DataFrames into a single DataFrame
+evol_cum_deaths_df = pd.concat(dataframes)
+
+# Reset the index
+evol_cum_deaths_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of cumulative deaths (all-time) --")
 
 # New cases (weekly)
 
-new_cases_weekly_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_casesweekly = new_cases_weekly(data_cases_deaths, country)
+    new_casesweekly["Country"] = country
+    dataframes.append(new_casesweekly)
 
-    new_cases_weekly_var[country] = new_casesweekly
+# Concatenate all DataFrames into a single DataFrame
+new_cases_weekly_df = pd.concat(dataframes)
+
+# Reset the index
+new_cases_weekly_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New cases (weekly) --")
 
 # New deaths (weekly)
 
-new_deaths_weekly_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_deathsweekly = new_deaths_weekly(data_cases_deaths, country)
+    new_deathsweekly["Country"] = country
+    dataframes.append(new_deathsweekly)
 
-    new_deaths_weekly_var[country] = new_deathsweekly
+# Concatenate all DataFrames into a single DataFrame
+new_deaths_weekly_df = pd.concat(dataframes)
+
+# Reset the index
+new_deaths_weekly_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New deaths (weekly) --")
 
 # New cases (weekly % change)
 
-new_cases_weekly_change_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_cases_weeklychange = new_cases_weekly_change(data_cases_deaths, country)
+    new_cases_weeklychange["Country"] = country
+    dataframes.append(new_cases_weeklychange)
 
-    new_cases_weekly_change_var[country] = new_cases_weeklychange
+# Concatenate all DataFrames into a single DataFrame
+new_cases_weekly_change_df = pd.concat(dataframes)
+
+# Reset the index
+new_cases_weekly_change_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New cases (weekly % change) --")
 
 # New deaths (weekly % change)
 
-new_deaths_weekly_change_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
-
     new_deaths_weeklychange = new_deaths_weekly_change(data_cases_deaths, country)
+    new_deaths_weeklychange["Country"] = country
+    dataframes.append(new_deaths_weeklychange)
 
-    new_deaths_weekly_change_var[country] = new_deaths_weeklychange
+# Concatenate all DataFrames into a single DataFrame
+new_deaths_weekly_change_df = pd.concat(dataframes)
+
+# Reset the index
+new_deaths_weekly_change_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New deaths (weekly % change) --")
 
 
 # Top 10 weeks with most new cases
 
-top_10_weeks_cases_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
+    top_10_weeks_cases = top_10_weeks_cases(data_cases_deaths, country)
+    top_10_weeks_cases["Country"] = country
+    dataframes.append(top_10_weeks_cases)
 
-    top_10_weekscases = top_10_weeks_cases(data_cases_deaths, country)
+# Concatenate all DataFrames into a single DataFrame
+top_10_weeks_cases_df = pd.concat(dataframes)
 
-    top_10_weeks_cases_var[country] = top_10_weekscases
+# Reset the index
+top_10_weeks_cases_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Top 10 weeks with most new cases --")
 
 # Top 10 weeks with most new deaths
 
-top_10_weeks_deaths_var = {}
+dataframes = []
 
 for code, country in dict_country_code_name.items():
+    top_10_weeks_deaths = top_10_weeks_deaths(data_cases_deaths, country)
+    top_10_weeks_deaths["Country"] = country
+    dataframes.append(top_10_weeks_deaths)
 
-    top_10_weeksdeaths = top_10_weeks_deaths(data_cases_deaths, country)
+# Concatenate all DataFrames into a single DataFrame
+top_10_weeks_deaths_df = pd.concat(dataframes)
 
-    top_10_weeks_deaths_var[country] = top_10_weeksdeaths
+# Reset the index
+top_10_weeks_deaths_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Top 10 weeks with most new deaths --")
 
@@ -315,73 +406,123 @@ print("-- ✅ Top 15 countries with highest total incidence of deaths per 100k -
 
 # Number of weekly vaccinations per country
 
-new_vaccinations_weekly_var = {}
+dataframes = []
 
 for code, country in dict_isocode_countries.items():
+    new_vaccinations_weekly = new_vaccinations_weekly(data_vaccination, country)
+    new_vaccinations_weekly["Country"] = country
+    dataframes.append(new_vaccinations_weekly)
 
-    new_vaccinationsweekly = new_vaccinations_weekly(data_vaccination, country)
+# Concatenate all DataFrames into a single DataFrame
+new_vaccinations_weekly_df = pd.concat(dataframes)
 
-    new_vaccinations_weekly_var[country] = new_vaccinationsweekly
+# Reset the index
+new_vaccinations_weekly_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of weekly vaccinations per country --")
 
 # Total number of vaccinated people per country
 
-total_vaccinations_country_var = {}
+dataframes = []
 
 for code, country in dict_isocode_countries.items():
+    total_vaccinations_country = total_vaccinations_country(data_vaccination, country)
+    total_vaccinations_country["Country"] = country
+    dataframes.append(total_vaccinations_country)
 
-    total_vaccinationscountry = total_vaccinations_country(data_vaccination, country)
+# Concatenate all DataFrames into a single DataFrame
+total_vaccinations_country_df = pd.concat(dataframes)
 
-    total_vaccinations_country_var[country] = total_vaccinationscountry
+# Reset the index
+total_vaccinations_country_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Total number of vaccinated people per country --")
 
 # Total % of vaccinated people per country
 
-total_vaccinations_rate_country_var = {}
+dataframes = []
 
 for code, country in dict_isocode_countries.items():
+    # Get the DataFrame for the current country
+    df = total_vaccinations_rate_country(data_vaccination, country)
 
-    total_vaccinationsratecountry = total_vaccinations_rate_country(data_vaccination, country)
+    # Add a 'Country' column to the DataFrame
+    df['Country'] = country
 
-    total_vaccinations_rate_country_var[country] = total_vaccinationsratecountry
+    # Append the DataFrame to the list
+    dataframes.append(df)
+
+# Concatenate all the DataFrames in the list into a single DataFrame
+total_vaccinations_rate_country_df = pd.concat(dataframes)
+
+# Reset the index of the DataFrame
+total_vaccinations_rate_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total % of vaccinated people per country --")
 
 # Total % of vaccinated people per country (evolution / month)
 
-vaccinations_rate_evol_country_var = {}
+dataframes = []
 
 for code, country in dict_isocode_countries.items():
+    # Get the DataFrame for the current country
+    df = vaccinations_rate_evol_country(data_vaccination, country)
 
-    vaccinationsrateevolcountry = vaccinations_rate_evol_country(data_vaccination, country)
+    # Add a 'Country' column to the DataFrame
+    df['Country'] = country
 
-    vaccinations_rate_evol_country_var[country] = vaccinationsrateevolcountry
+    # Append the DataFrame to the list
+    dataframes.append(df)
+
+# Concatenate all the DataFrames in the list into a single DataFrame
+vaccinations_rate_evol_country_df = pd.concat(dataframes)
+
+# Reset the index of the DataFrame
+vaccinations_rate_evol_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total % of vaccinated people per country (evolution) --")
 
 # Total nb of vaccinated people per country (evolution / month)
 
-vaccinations_change_evol_country_var = {}
+dataframes = []
 
 for code, country in dict_isocode_countries.items():
+    # Get the DataFrame for the current country
+    df = vaccinations_change_evol_country(data_vaccination, country)
 
-    vaccinationschangeevolcountry = vaccinations_change_evol_country(data_vaccination, country)
+    # Add a 'Country' column to the DataFrame
+    df['Country'] = country
 
-    vaccinations_change_evol_country_var[country] = vaccinationschangeevolcountry
+    # Append the DataFrame to the list
+    dataframes.append(df)
+
+# Concatenate all the DataFrames in the list into a single DataFrame
+vaccinations_change_evol_country_df = pd.concat(dataframes)
+
+# Reset the index of the DataFrame
+vaccinations_change_evol_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (evolution / month) --")
 
 # Total nb of vaccinated people per country (monthly)
 
-vaccinations_monthly_total_var = {}
+dataframes = []
 
 for code, country in dict_isocode_countries.items():
+    # Get the DataFrame for the current country
+    df = vaccinations_monthly_total(data_vaccination, country)
 
-    vaccinationsmonthlytotal = vaccinations_monthly_total(data_vaccination, country)
+    # Add a 'Country' column to the DataFrame
+    df['Country'] = country
 
-    vaccinations_monthly_total_var[country] = vaccinationsmonthlytotal
+    # Append the DataFrame to the list
+    dataframes.append(df)
+
+# Concatenate all the DataFrames in the list into a single DataFrame
+vaccinations_monthly_total_df = pd.concat(dataframes)
+
+# Reset the index of the DataFrame
+vaccinations_monthly_total_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (monthly) --")
 
@@ -389,9 +530,32 @@ print("-- ✅ Total nb of vaccinated people per country (monthly) --")
 
 # Top 15 countries with highest vaccination rate
 
-top_15_vaccinations_rate_var = top_15_vaccinations_rate(data_vaccination, dict_isocode_population_300k, dict_isocode_countries)
+top_15_vaccinations_rate_df = top_15_vaccinations_rate(data_vaccination, dict_isocode_population_300k, dict_isocode_countries)
 
 print("-- ✅ Top 15 countries with highest vaccination rate --")
+
+
+
+
+# 3. Push data to BigQuery database
+
+# Authenticate with Google Cloud
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/path/to/your/service-account-key.json"
+
+# Your Google Cloud project ID
+project_id = 'your_project_id'
+
+# List of your dataframes and their corresponding table names
+dataframes = [
+    (new_cases_lastday_var, 'new_cases_lastday_var'),
+    (new_deaths_lastday_var, 'new_deaths_lastday_var'),
+    # ... add all your other dataframes here
+]
+
+# Push data to BigQuery
+for df, table_name in dataframes:
+    df.to_gbq(f'your_dataset.{table_name}', project_id=project_id, if_exists='replace')
+
 
 
 """
