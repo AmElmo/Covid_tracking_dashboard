@@ -309,29 +309,84 @@ top_15_total_death_incidence_var = top_15_total_death_incidence(data_cases_death
 print("-- ✅ Top 15 countries with highest total incidence of deaths per 100k --")
 
 
+# D. Data on vaccinations
+
+## Country level functions
+
+# Number of weekly vaccinations per country
+def new_vaccinations_weekly(data,country):
+
+    data_country = data[data["location"] == country]
+    new_vaccinations_weekly = data_country[["date", "daily_vaccinations"]]
+    new_vaccinations_weekly["Weekly_vaccinations"] = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+
+    new_vaccinations_weekly = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+    new_vaccinations_weekly = new_vaccinations_weekly.to_frame()
+    new_vaccinations_weekly.reset_index(inplace=True)
+    new_vaccinations_weekly = new_vaccinations_weekly.rename(columns={"daily_vaccinations": "Weekly_vaccinations"})
+
+    return new_vaccinations_weekly
+
+# Total number of vaccinated people per country
+def total_vaccinations_country(data,country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["people_fully_vaccinated"]]
+
+    vaccinations_total = vaccinations_total.iloc[-1][0]
+
+    return vaccinations_total
+
+# Total % of vaccinated people per country
+def total_vaccinations_rate_country(data,country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["people_vaccinated_per_hundred"]]
+    vaccinations_total = vaccinations_total.iloc[-1][0]
+
+    return vaccinations_total
 
 
+# Total % of vaccinated people per country (evolution)
+def vaccinations_rate_evol_country(data,country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["date","people_vaccinated_per_hundred"]]
+
+    return vaccinations_total
 
 
+## Global level functions
 
+# Top 15 countries with highest vaccination rate
+def top_15_vaccinations_rate(data):
+    vaccinations_rates = {}
 
+    for code, country in dictionary_population_iso.items():
 
+        data_country = data[data["iso_code"] == code]
 
+        if pd.isna(data_country["people_vaccinated_per_hundred"].iloc[-1]) == False:
 
+            vaccination_rate_latest = data_country["people_vaccinated_per_hundred"].iloc[-1]
 
+        else:
 
+            vaccination_rate_latest = data_country["people_vaccinated_per_hundred"].iloc[-2]
 
+        # Add vaccination rate to dictionary for given country
+        vaccinations_rates[code] = vaccination_rate_latest
 
+    # Sort countries by vaccination rate
+    vaccinations_rates_sorted = dict(sorted(vaccinations_rates.items(), key=lambda x:x[1], reverse=True))
 
+    # Select top 15 countries
+    top_15_vaccination_rates = {key: vaccinations_rates_sorted[key] for key in list(vaccinations_rates_sorted)[:15]}
 
+    # Turn country codes to country names
+    top_15_vaccination_rates = dict((dictionary_isocodes[key], value) for (key, value) in top_15_vaccination_rates.items())
 
-
-
+    return top_15_vaccination_rates
 
 
 """
-
-# D. Data on vaccinations
 
 
 # 3. Push data to BigQuery database
