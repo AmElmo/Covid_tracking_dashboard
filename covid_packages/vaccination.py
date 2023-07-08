@@ -57,10 +57,13 @@ def dictionary_iso_code(data):
 ## Country level functions
 
 # Number of weekly vaccinations per country
-def new_vaccinations_weekly(data,country):
-
+def new_vaccinations_weekly(data, country):
     data_country = data[data["location"] == country]
     new_vaccinations_weekly = data_country[["date", "daily_vaccinations"]]
+
+    # Convert "daily_vaccinations" column to string
+    new_vaccinations_weekly["daily_vaccinations"] = new_vaccinations_weekly["daily_vaccinations"].astype(str)
+
     new_vaccinations_weekly["Weekly_vaccinations"] = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
 
     new_vaccinations_weekly = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
@@ -88,10 +91,51 @@ def total_vaccinations_rate_country(data,country):
     return vaccinations_total
 
 
-# Total % of vaccinated people per country (evolution)
-def vaccinations_rate_evol_country(data,country):
+# Total % of vaccinated people per country (evolution / month)
+def vaccinations_rate_evol_country(data, country):
     data_country = data[data["location"] == country]
-    vaccinations_total = data_country[["date","people_vaccinated_per_hundred"]]
+    vaccinations_total = data_country[["date", "people_vaccinated_per_hundred"]]
+
+    # Calculate vaccination rate per week
+    vaccinations_total = vaccinations_total.groupby(pd.Grouper(key="date", freq="W-MON")).mean().reset_index()
+
+    return vaccinations_total
+
+# Total nb of vaccinated people per country (evolution / month)
+
+def vaccinations_change_evol_country(data, country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["date", "total_vaccinations"]]
+
+    # Clean and convert "total_vaccinations" column to numeric data type
+    vaccinations_total["total_vaccinations"] = pd.to_numeric(vaccinations_total["total_vaccinations"], errors="coerce")
+
+    # Convert "date" column to datetime type
+    vaccinations_total["date"] = pd.to_datetime(vaccinations_total["date"])
+
+    # Set "date" column as the index
+    vaccinations_total.set_index("date", inplace=True)
+
+    # Resample to monthly frequency and calculate the absolute change
+    vaccinations_total = vaccinations_total.resample("M").last()
+    vaccinations_total["Vaccination_change"] = vaccinations_total["total_vaccinations"].diff()
+
+    return vaccinations_total
+
+# Total nb of vaccinated people per country (monthly)
+
+def vaccinations_monthly_total(data, country):
+    data_country = data[data["location"] == country]
+    vaccinations_total = data_country[["date", "total_vaccinations"]]
+
+    # Convert "date" column to datetime type
+    vaccinations_total["date"] = pd.to_datetime(vaccinations_total["date"])
+
+    # Set "date" column as the index
+    vaccinations_total.set_index("date", inplace=True)
+
+    # Resample to monthly frequency and calculate the total vaccinations
+    vaccinations_total = vaccinations_total.resample("M").last()
 
     return vaccinations_total
 

@@ -349,7 +349,7 @@ for code, country in dict_isocode_countries.items():
 
 print("-- ✅ Total % of vaccinated people per country --")
 
-# Total % of vaccinated people per country (evolution)
+# Total % of vaccinated people per country (evolution / month)
 
 vaccinations_rate_evol_country_var = {}
 
@@ -361,6 +361,30 @@ for code, country in dict_isocode_countries.items():
 
 print("-- ✅ Total % of vaccinated people per country (evolution) --")
 
+# Total nb of vaccinated people per country (evolution / month)
+
+vaccinations_change_evol_country_var = {}
+
+for code, country in dict_isocode_countries.items():
+
+    vaccinationschangeevolcountry = vaccinations_change_evol_country(data_vaccination, country)
+
+    vaccinations_change_evol_country_var[country] = vaccinationschangeevolcountry
+
+print("-- ✅ Total nb of vaccinated people per country (evolution / month) --")
+
+# Total nb of vaccinated people per country (monthly)
+
+vaccinations_monthly_total_var = {}
+
+for code, country in dict_isocode_countries.items():
+
+    vaccinationsmonthlytotal = vaccinations_monthly_total(data_vaccination, country)
+
+    vaccinations_monthly_total_var[country] = vaccinationsmonthlytotal
+
+print("-- ✅ Total nb of vaccinated people per country (monthly) --")
+
 ## Global level functions
 
 # Top 15 countries with highest vaccination rate
@@ -368,7 +392,6 @@ print("-- ✅ Total % of vaccinated people per country (evolution) --")
 top_15_vaccinations_rate_var = top_15_vaccinations_rate(data_vaccination, dict_isocode_population_300k, dict_isocode_countries)
 
 print("-- ✅ Top 15 countries with highest vaccination rate --")
-
 
 
 """
