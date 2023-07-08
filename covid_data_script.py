@@ -314,35 +314,38 @@ print("-- ✅ Top 15 countries with highest total incidence of deaths per 100k -
 ## Country level functions
 
 # Number of weekly vaccinations per country
-def new_vaccinations_weekly(data,country):
 
-    data_country = data[data["location"] == country]
-    new_vaccinations_weekly = data_country[["date", "daily_vaccinations"]]
-    new_vaccinations_weekly["Weekly_vaccinations"] = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+new_vaccinations_weekly_var = {}
 
-    new_vaccinations_weekly = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
-    new_vaccinations_weekly = new_vaccinations_weekly.to_frame()
-    new_vaccinations_weekly.reset_index(inplace=True)
-    new_vaccinations_weekly = new_vaccinations_weekly.rename(columns={"daily_vaccinations": "Weekly_vaccinations"})
+for code, country in dict_isocode_countries.items():
 
-    return new_vaccinations_weekly
+    new_vaccinationsweekly = new_vaccinations_weekly(data_vaccination, country)
+
+    new_vaccinations_weekly_var[country] = new_vaccinationsweekly
+
+print("-- ✅ Number of weekly vaccinations per country --")
 
 # Total number of vaccinated people per country
-def total_vaccinations_country(data,country):
-    data_country = data[data["location"] == country]
-    vaccinations_total = data_country[["people_fully_vaccinated"]]
 
-    vaccinations_total = vaccinations_total.iloc[-1][0]
+total_vaccinations_country_var = {}
 
-    return vaccinations_total
+for code, country in dict_isocode_countries.items():
+
+    total_vaccinationscountry = total_vaccinations_country(data_vaccination, country)
+
+    total_vaccinations_country_var[country] = total_vaccinationscountry
+
+print("-- ✅ Total number of vaccinated people per country --")
 
 # Total % of vaccinated people per country
-def total_vaccinations_rate_country(data,country):
-    data_country = data[data["location"] == country]
-    vaccinations_total = data_country[["people_vaccinated_per_hundred"]]
-    vaccinations_total = vaccinations_total.iloc[-1][0]
 
-    return vaccinations_total
+total_vaccinations_rate_country_var = {}
+
+for code, country in dict_isocode_countries.items():
+
+    total_vaccinationsratecountry = total_vaccinations_rate_country(data_vaccination, country)
+
+    total_vaccinations_rate_country_var[country] = total_vaccinationsratecountry
 
 
 # Total % of vaccinated people per country (evolution)
