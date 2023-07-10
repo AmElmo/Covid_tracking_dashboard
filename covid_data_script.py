@@ -359,15 +359,16 @@ print("-- ✅ New deaths (weekly % change) --")
 dataframes = []
 
 for code, country in dict_country_code_name.items():
-    top_10_weeks_cases = top_10_weeks_cases(data_cases_deaths, country)
-    top_10_weeks_cases["Country"] = country
-    dataframes.append(top_10_weeks_cases)
+    top_10_weekscases = top_10_weeks_cases(data_cases_deaths, country)
+    top_10_weekscases_df = pd.DataFrame({"Top_10_weekscases": [top_10_weekscases], "Country": [country]})
+    top_10_weekscases_df["Country"] = country
+    dataframes.append(top_10_weekscases_df)
 
 # Concatenate all DataFrames into a single DataFrame
-top_10_weeks_cases_df = pd.concat(dataframes)
+top_10_weekscases_df = pd.concat(dataframes)
 
 # Reset the index
-top_10_weeks_cases_df.reset_index(drop=True, inplace=True)
+top_10_weekscases_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Top 10 weeks with most new cases --")
 
@@ -376,15 +377,16 @@ print("-- ✅ Top 10 weeks with most new cases --")
 dataframes = []
 
 for code, country in dict_country_code_name.items():
-    top_10_weeks_deaths = top_10_weeks_deaths(data_cases_deaths, country)
-    top_10_weeks_deaths["Country"] = country
-    dataframes.append(top_10_weeks_deaths)
+    top_10_weeksdeaths = top_10_weeks_deaths(data_cases_deaths, country)
+    top_10_weeksdeaths_df = pd.DataFrame({"Top_10_weeksdeaths": [top_10_weeksdeaths], "Country": [country]})
+    top_10_weeksdeaths_df["Country"] = country
+    dataframes.append(top_10_weeksdeaths_df)
 
 # Concatenate all DataFrames into a single DataFrame
-top_10_weeks_deaths_df = pd.concat(dataframes)
+top_10_weeksdeaths_df = pd.concat(dataframes)
 
 # Reset the index
-top_10_weeks_deaths_df.reset_index(drop=True, inplace=True)
+top_10_weeksdeaths_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Top 10 weeks with most new deaths --")
 
