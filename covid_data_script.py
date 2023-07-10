@@ -401,19 +401,19 @@ print("-- ✅ Top 10 weeks with most new deaths --")
 
 # Top 15 countries with most new cases / 100k today / this week
 
-top_15_new_cases_lastweek_var = top_15_new_cases_lastweek(data_cases_deaths, dict_country_code_population, dict_country_code_name)
+top_15_new_cases_lastweek_df = top_15_new_cases_lastweek(data_cases_deaths, dict_country_code_population, dict_country_code_name)
 
 print("-- ✅ Top 15 countries with most new cases / 100k today / this week --")
 
 # Top 15 countries with most new deaths / 100k this week
 
-top_15_new_deaths_lastweek_var = top_15_new_deaths_lastweek(data_cases_deaths, dict_country_code_population, dict_country_code_name)
+top_15_new_deaths_lastweek_df = top_15_new_deaths_lastweek(data_cases_deaths, dict_country_code_population, dict_country_code_name)
 
 print("-- ✅ Top 15 countries with most new deaths / 100k this week --")
 
 # Top 15 countries with highest total incidence of deaths per 100k
 
-top_15_total_death_incidence_var = top_15_total_death_incidence(data_cases_deaths, dict_country_code_population, dict_country_code_name)
+top_15_total_death_incidence_df = top_15_total_death_incidence(data_cases_deaths, dict_country_code_population, dict_country_code_name)
 
 print("-- ✅ Top 15 countries with highest total incidence of deaths per 100k --")
 
@@ -427,15 +427,16 @@ print("-- ✅ Top 15 countries with highest total incidence of deaths per 100k -
 dataframes = []
 
 for code, country in dict_isocode_countries.items():
-    new_vaccinations_weekly = new_vaccinations_weekly(data_vaccination, country)
-    new_vaccinations_weekly["Country"] = country
-    dataframes.append(new_vaccinations_weekly)
+    new_vaccinationsweekly = new_vaccinations_weekly(data_vaccination, country)
+    new_vaccinationsweekly_df = pd.DataFrame({"New_vaccinations_weekly": [new_vaccinationsweekly], "Country": [country]})
+    new_vaccinationsweekly_df["Country"] = country
+    dataframes.append(new_vaccinationsweekly_df)
 
 # Concatenate all DataFrames into a single DataFrame
-new_vaccinations_weekly_df = pd.concat(dataframes)
+new_vaccinationsweekly_df = pd.concat(dataframes)
 
 # Reset the index
-new_vaccinations_weekly_df.reset_index(drop=True, inplace=True)
+new_vaccinationsweekly_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of weekly vaccinations per country --")
 
@@ -444,15 +445,16 @@ print("-- ✅ Number of weekly vaccinations per country --")
 dataframes = []
 
 for code, country in dict_isocode_countries.items():
-    total_vaccinations_country = total_vaccinations_country(data_vaccination, country)
-    total_vaccinations_country["Country"] = country
-    dataframes.append(total_vaccinations_country)
+    total_vaccinationscountry = total_vaccinations_country(data_vaccination, country)
+    total_vaccinationscountry_df = pd.DataFrame({"Total_vaccinations_country": [total_vaccinationscountry], "Country": [country]})
+    total_vaccinationscountry_df["Country"] = country
+    dataframes.append(total_vaccinationscountry_df)
 
 # Concatenate all DataFrames into a single DataFrame
-total_vaccinations_country_df = pd.concat(dataframes)
+total_vaccinationscountry_df = pd.concat(dataframes)
 
 # Reset the index
-total_vaccinations_country_df.reset_index(drop=True, inplace=True)
+total_vaccinationscountry_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Total number of vaccinated people per country --")
 
@@ -462,19 +464,16 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     # Get the DataFrame for the current country
-    df = total_vaccinations_rate_country(data_vaccination, country)
-
-    # Add a 'Country' column to the DataFrame
-    df['Country'] = country
-
-    # Append the DataFrame to the list
-    dataframes.append(df)
+    total_vaccinationsrate_country = total_vaccinations_rate_country(data_vaccination, country)
+    total_vaccinationsrate_country_df = pd.DataFrame({"Perc_vaccinations_country": [total_vaccinationsrate_country], "Country": [country]})
+    total_vaccinationsrate_country_df['Country'] = country
+    dataframes.append(total_vaccinationsrate_country_df)
 
 # Concatenate all the DataFrames in the list into a single DataFrame
-total_vaccinations_rate_country_df = pd.concat(dataframes)
+total_vaccinationsrate_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-total_vaccinations_rate_country_df.reset_index(inplace=True)
+total_vaccinationsrate_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total % of vaccinated people per country --")
 
@@ -484,19 +483,16 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     # Get the DataFrame for the current country
-    df = vaccinations_rate_evol_country(data_vaccination, country)
-
-    # Add a 'Country' column to the DataFrame
-    df['Country'] = country
-
-    # Append the DataFrame to the list
-    dataframes.append(df)
+    vaccinations_rateevol_country = vaccinations_rate_evol_country(data_vaccination, country)
+    vaccinations_rateevol_country_df = pd.DataFrame({"Perc_vaccinations_country_evol": [vaccinations_rateevol_country], "Country": [country]})
+    vaccinations_rateevol_country_df['Country'] = country
+    dataframes.append(vaccinations_rateevol_country_df)
 
 # Concatenate all the DataFrames in the list into a single DataFrame
-vaccinations_rate_evol_country_df = pd.concat(dataframes)
+vaccinations_rateevol_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-vaccinations_rate_evol_country_df.reset_index(inplace=True)
+vaccinations_rateevol_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total % of vaccinated people per country (evolution) --")
 
@@ -506,19 +502,16 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     # Get the DataFrame for the current country
-    df = vaccinations_change_evol_country(data_vaccination, country)
-
-    # Add a 'Country' column to the DataFrame
-    df['Country'] = country
-
-    # Append the DataFrame to the list
-    dataframes.append(df)
+    vaccinations_changeevol_country = vaccinations_change_evol_country(data_vaccination, country)
+    vaccinations_changeevol_country_df = pd.DataFrame({"Vaccinations_change_country_evol": [vaccinations_changeevol_country], "Country": [country]})
+    vaccinations_changeevol_country_df['Country'] = country
+    dataframes.append(vaccinations_changeevol_country_df)
 
 # Concatenate all the DataFrames in the list into a single DataFrame
-vaccinations_change_evol_country_df = pd.concat(dataframes)
+vaccinations_changeevol_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-vaccinations_change_evol_country_df.reset_index(inplace=True)
+vaccinations_changeevol_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (evolution / month) --")
 
@@ -528,19 +521,16 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     # Get the DataFrame for the current country
-    df = vaccinations_monthly_total(data_vaccination, country)
-
-    # Add a 'Country' column to the DataFrame
-    df['Country'] = country
-
-    # Append the DataFrame to the list
-    dataframes.append(df)
+    vaccinationsmonthly_total = vaccinations_monthly_total(data_vaccination, country)
+    vaccinationsmonthly_total_df = pd.DataFrame({"Vaccinations_monthly_total": [vaccinationsmonthly_total], "Country": [country]})
+    vaccinationsmonthly_total_df['Country'] = country
+    dataframes.append(vaccinationsmonthly_total_df)
 
 # Concatenate all the DataFrames in the list into a single DataFrame
-vaccinations_monthly_total_df = pd.concat(dataframes)
+vaccinationsmonthly_total_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-vaccinations_monthly_total_df.reset_index(inplace=True)
+vaccinationsmonthly_total_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (monthly) --")
 
@@ -554,6 +544,17 @@ print("-- ✅ Top 15 countries with highest vaccination rate --")
 
 
 
+
+
+
+
+
+
+
+
+
+
+"""
 
 # 3. Push data to BigQuery database
 
@@ -574,9 +575,6 @@ dataframes = [
 for df, table_name in dataframes:
     df.to_gbq(f'your_dataset.{table_name}', project_id=project_id, if_exists='replace')
 
-
-
-"""
 
 
 # 3. Push data to BigQuery database
