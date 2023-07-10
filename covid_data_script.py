@@ -178,14 +178,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     cum_caseslatest = cum_cases_latest(data_cases_deaths, country)
-    cum_caseslatest["Country"] = country
-    dataframes.append(cum_caseslatest)
+    cum_caseslatest_df = pd.DataFrame({"Cum_caseslatest": [cum_caseslatest], "Country": [country]})
+    cum_caseslatest_df["Country"] = country
+    dataframes.append(cum_caseslatest_df)
 
 # Concatenate all DataFrames into a single DataFrame
-cum_cases_latest_df = pd.concat(dataframes)
+cum_caseslatest_df = pd.concat(dataframes)
 
 # Reset the index
-cum_cases_latest_df.reset_index(drop=True, inplace=True)
+cum_caseslatest_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of cumulative cases (latest) --")
 
@@ -195,14 +196,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     cum_deathslatest = cum_deaths_latest(data_cases_deaths, country)
-    cum_deathslatest["Country"] = country
-    dataframes.append(cum_deathslatest)
+    cum_deathslatest_df = pd.DataFrame({"Cum_deathslatest": [cum_deathslatest], "Country": [country]})
+    cum_deathslatest_df["Country"] = country
+    dataframes.append(cum_deathslatest_df)
 
 # Concatenate all DataFrames into a single DataFrame
-cum_deaths_latest_df = pd.concat(dataframes)
+cum_deathslatest_df = pd.concat(dataframes)
 
 # Reset the index
-cum_deaths_latest_df.reset_index(drop=True, inplace=True)
+cum_deathslatest_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Number of cumulative deaths (latest) --")
 
@@ -213,14 +215,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     evol_casesalltime = evol_cases_alltime(data_cases_deaths, country)
-    evol_casesalltime["Country"] = country
-    dataframes.append(evol_casesalltime)
+    evol_casesalltime_df = pd.DataFrame({"Evol_casesalltime": [evol_casesalltime], "Country": [country]})
+    evol_casesalltime_df["Country"] = country
+    dataframes.append(evol_casesalltime_df)
 
 # Concatenate all DataFrames into a single DataFrame
-evol_cases_alltime_df = pd.concat(dataframes)
+evol_casesalltime_df = pd.concat(dataframes)
 
 # Reset the index
-evol_cases_alltime_df.reset_index(drop=True, inplace=True)
+evol_casesalltime_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of new cases (all-time) --")
 
@@ -230,14 +233,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     evol_deathsalltime = evol_deaths_alltime(data_cases_deaths, country)
-    evol_deathsalltime["Country"] = country
-    dataframes.append(evol_deathsalltime)
+    evol_deathsalltime_df = pd.DataFrame({"Evol_deathsalltime": [evol_deathsalltime], "Country": [country]})
+    evol_deathsalltime_df["Country"] = country
+    dataframes.append(evol_deathsalltime_df)
 
 # Concatenate all DataFrames into a single DataFrame
-evol_deaths_alltime_df = pd.concat(dataframes)
+evol_deathsalltime_df = pd.concat(dataframes)
 
 # Reset the index
-evol_deaths_alltime_df.reset_index(drop=True, inplace=True)
+evol_deathsalltime_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of new deaths (all-time) --")
 
@@ -247,14 +251,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     evol_cumcases = evol_cum_cases(data_cases_deaths, country)
-    evol_cumcases["Country"] = country
-    dataframes.append(evol_cumcases)
+    evol_cumcases_df = pd.DataFrame({"Evol_cumcases": [evol_cumcases], "Country": [country]})
+    evol_cumcases_df["Country"] = country
+    dataframes.append(evol_cumcases_df)
 
 # Concatenate all DataFrames into a single DataFrame
-evol_cum_cases_df = pd.concat(dataframes)
+evol_cumcases_df = pd.concat(dataframes)
 
 # Reset the index
-evol_cum_cases_df.reset_index(drop=True, inplace=True)
+evol_cumcases_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of cumulative cases (all-time) --")
 
@@ -264,14 +269,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     evol_cumdeaths = evol_cum_deaths(data_cases_deaths, country)
-    evol_cumdeaths["Country"] = country
-    dataframes.append(evol_cumdeaths)
+    evol_cumdeaths_df = pd.DataFrame({"Evol_cumdeaths": [evol_cumdeaths], "Country": [country]})
+    evol_cumdeaths_df["Country"] = country
+    dataframes.append(evol_cumdeaths_df)
 
 # Concatenate all DataFrames into a single DataFrame
-evol_cum_deaths_df = pd.concat(dataframes)
+evol_cumdeaths_df = pd.concat(dataframes)
 
 # Reset the index
-evol_cum_deaths_df.reset_index(drop=True, inplace=True)
+evol_cumdeaths_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Evolution of cumulative deaths (all-time) --")
 
@@ -281,14 +287,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_casesweekly = new_cases_weekly(data_cases_deaths, country)
-    new_casesweekly["Country"] = country
-    dataframes.append(new_casesweekly)
+    new_casesweekly_df = pd.DataFrame({"New_cases_weekly": [new_casesweekly], "Country": [country]})
+    new_casesweekly_df["Country"] = country
+    dataframes.append(new_casesweekly_df)
 
 # Concatenate all DataFrames into a single DataFrame
-new_cases_weekly_df = pd.concat(dataframes)
+new_casesweekly_df = pd.concat(dataframes)
 
 # Reset the index
-new_cases_weekly_df.reset_index(drop=True, inplace=True)
+new_casesweekly_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New cases (weekly) --")
 
@@ -298,14 +305,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_deathsweekly = new_deaths_weekly(data_cases_deaths, country)
-    new_deathsweekly["Country"] = country
-    dataframes.append(new_deathsweekly)
+    new_deathsweekly_df = pd.DataFrame({"New_deaths_weekly": [new_deathsweekly], "Country": [country]})
+    new_deathsweekly_df["Country"] = country
+    dataframes.append(new_deathsweekly_df)
 
 # Concatenate all DataFrames into a single DataFrame
-new_deaths_weekly_df = pd.concat(dataframes)
+new_deathsweekly_df = pd.concat(dataframes)
 
 # Reset the index
-new_deaths_weekly_df.reset_index(drop=True, inplace=True)
+new_deathsweekly_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New deaths (weekly) --")
 
@@ -315,14 +323,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_cases_weeklychange = new_cases_weekly_change(data_cases_deaths, country)
-    new_cases_weeklychange["Country"] = country
-    dataframes.append(new_cases_weeklychange)
+    new_cases_weeklychange_df = pd.DataFrame({"New_cases_weeklychange": [new_cases_weeklychange], "Country": [country]})
+    new_cases_weeklychange_df["Country"] = country
+    dataframes.append(new_cases_weeklychange_df)
 
 # Concatenate all DataFrames into a single DataFrame
-new_cases_weekly_change_df = pd.concat(dataframes)
+new_cases_weeklychange_df = pd.concat(dataframes)
 
 # Reset the index
-new_cases_weekly_change_df.reset_index(drop=True, inplace=True)
+new_cases_weeklychange_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New cases (weekly % change) --")
 
@@ -332,14 +341,15 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     new_deaths_weeklychange = new_deaths_weekly_change(data_cases_deaths, country)
-    new_deaths_weeklychange["Country"] = country
-    dataframes.append(new_deaths_weeklychange)
+    new_deaths_weeklychange_df = pd.DataFrame({"New_deaths_weeklychange": [new_deaths_weeklychange], "Country": [country]})
+    new_deaths_weeklychange_df["Country"] = country
+    dataframes.append(new_deaths_weeklychange_df)
 
 # Concatenate all DataFrames into a single DataFrame
-new_deaths_weekly_change_df = pd.concat(dataframes)
+new_deaths_weeklychange_df = pd.concat(dataframes)
 
 # Reset the index
-new_deaths_weekly_change_df.reset_index(drop=True, inplace=True)
+new_deaths_weeklychange_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New deaths (weekly % change) --")
 
