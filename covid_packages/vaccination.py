@@ -74,11 +74,9 @@ def new_vaccinations_weekly(data, country):
     return new_vaccinations_weekly
 
 # Total number of vaccinated people per country
-def total_vaccinations_country(data,country):
+def total_vaccinations_country(data, country):
     data_country = data[data["location"] == country]
-    vaccinations_total = data_country[["people_fully_vaccinated"]]
-
-    vaccinations_total = vaccinations_total.iloc[-1][0]
+    vaccinations_total = data_country["people_fully_vaccinated"].iloc[-1]
 
     return vaccinations_total
 
