@@ -474,7 +474,7 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     # Get the DataFrame for the current country
-    vaccinations_changeevol_country = vaccinations_change_evol_country(data_vaccination, country)
+    vaccinations_changeevol_country = vaccinations_rate_evol_country(data_vaccination, country)
     vaccinations_changeevol_country['Country'] = country
     dataframes.append(vaccinations_changeevol_country)
 
