@@ -428,8 +428,8 @@ for code, country in dict_isocode_countries.items():
     total_vaccinations_country_value["Country"] = country
     dataframes.append(total_vaccinations_country_value)
 
-# Create a DataFrame from the list of dictionaries
-total_vaccinationscountry_df = pd.DataFrame(dataframes)
+# Concatenate all the DataFrames in the list into a single DataFrame
+total_vaccinationscountry_df = pd.concat(dataframes)
 
 # Reset the index
 total_vaccinationscountry_df.reset_index(drop=True, inplace=True)
@@ -441,16 +441,15 @@ print("-- ✅ Number of weekly vaccinations per country --")
 dataframes = []
 
 for code, country in dict_isocode_countries.items():
-    total_vaccinationscountry = total_vaccinations_country(data_vaccination, country)
-    total_vaccinationscountry_df = pd.DataFrame({"Total_vaccinations_country": [total_vaccinationscountry], "Country": [country]})
-    total_vaccinationscountry_df["Country"] = country
-    dataframes.append(total_vaccinationscountry_df)
+    total_vaccinatedpeople_country = total_vaccinations_country(data_vaccination, country)
+    total_vaccinatedpeople_country['Country'] = country
+    dataframes.append(total_vaccinatedpeople_country)
 
-# Concatenate all DataFrames into a single DataFrame
-total_vaccinationscountry_df = pd.concat(dataframes)
+# Concatenate all the DataFrames in the list into a single DataFrame
+total_vaccinatedpeople_country_df = pd.concat(dataframes)
 
-# Reset the index
-total_vaccinationscountry_df.reset_index(drop=True, inplace=True)
+# Reset the index of the DataFrame
+total_vaccinatedpeople_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total number of vaccinated people per country --")
 
@@ -459,17 +458,15 @@ print("-- ✅ Total number of vaccinated people per country --")
 dataframes = []
 
 for code, country in dict_isocode_countries.items():
-    # Get the DataFrame for the current country
-    total_vaccinationsrate_country = total_vaccinations_rate_country(data_vaccination, country)
-    total_vaccinationsrate_country_df = pd.DataFrame({"Perc_vaccinations_country": [total_vaccinationsrate_country], "Country": [country]})
-    total_vaccinationsrate_country_df['Country'] = country
-    dataframes.append(total_vaccinationsrate_country_df)
+    total_percvaccinated_country = total_vaccinations_country(data_vaccination, country)
+    total_percvaccinated_country['Country'] = country
+    dataframes.append(total_percvaccinated_country)
 
 # Concatenate all the DataFrames in the list into a single DataFrame
-total_vaccinationsrate_country_df = pd.concat(dataframes)
+total_percvaccinated_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-total_vaccinationsrate_country_df.reset_index(inplace=True)
+total_percvaccinated_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total % of vaccinated people per country --")
 
