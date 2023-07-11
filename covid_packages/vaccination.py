@@ -61,17 +61,19 @@ def new_vaccinations_weekly(data, country):
     data_country = data[data["location"] == country]
     new_vaccinations_weekly = data_country[["date", "daily_vaccinations"]]
 
-    # Convert "daily_vaccinations" column to string
-    new_vaccinations_weekly["daily_vaccinations"] = new_vaccinations_weekly["daily_vaccinations"].astype(str)
+    # Ensure "daily_vaccinations" column is treated as numeric
+    new_vaccinations_weekly["daily_vaccinations"] = pd.to_numeric(new_vaccinations_weekly["daily_vaccinations"], errors='coerce')
 
-    new_vaccinations_weekly["Weekly_vaccinations"] = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+    new_vaccinations_weekly["date"] = pd.to_datetime(new_vaccinations_weekly["date"])
 
-    new_vaccinations_weekly = new_vaccinations_weekly.groupby([pd.Grouper(key="date", freq="W-MON")])["daily_vaccinations"].sum()
+    new_vaccinations_weekly.set_index("date", inplace=True)
+    new_vaccinations_weekly = new_vaccinations_weekly.resample('W-MON')["daily_vaccinations"].sum()
     new_vaccinations_weekly = new_vaccinations_weekly.to_frame()
     new_vaccinations_weekly.reset_index(inplace=True)
     new_vaccinations_weekly = new_vaccinations_weekly.rename(columns={"daily_vaccinations": "Weekly_vaccinations"})
 
     return new_vaccinations_weekly
+
 
 # Total number of vaccinated people per country
 def total_vaccinations_country(data, country):
