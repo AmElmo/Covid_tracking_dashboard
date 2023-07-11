@@ -76,9 +76,11 @@ We use the following types of charts to display our insights:
 
 **TODOs**
 - ~~Review all data aggregation functions~~
-- Add regional functions
+- ~~Add regional functions~~
+- ~~Fix all functions showing wrong data~~
 - Push aggregated data to a BigQuery database
 - Write CRON job to fetch CSV data and run script ot push to BigQuery
 - Setup Metabase to plug to BigQuery data source
 - Make dashboards in Metabase (~12 dashboards in total)
 - Publish Metabase data
+- Finish the Readme
