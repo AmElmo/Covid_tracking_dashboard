@@ -442,14 +442,13 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     total_vaccinatedpeople_country = total_vaccinations_country(data_vaccination, country)
-    total_vaccinatedpeople_country['Country'] = country
-    dataframes.append(total_vaccinatedpeople_country)
+    dataframes.append(pd.DataFrame({"Country": [country], "Total_vaccinations": [total_vaccinatedpeople_country]}))
 
 # Concatenate all the DataFrames in the list into a single DataFrame
 total_vaccinatedpeople_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-total_vaccinatedpeople_country_df.reset_index(inplace=True)
+total_vaccinatedpeople_country_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Total number of vaccinated people per country --")
 
@@ -459,8 +458,7 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     total_percvaccinated_country = total_vaccinations_country(data_vaccination, country)
-    total_percvaccinated_country['Country'] = country
-    dataframes.append(total_percvaccinated_country)
+    dataframes.append(pd.DataFrame({"Country": [country], "Total_vaccinations": [total_percvaccinated_country]}))
 
 # Concatenate all the DataFrames in the list into a single DataFrame
 total_percvaccinated_country_df = pd.concat(dataframes)
