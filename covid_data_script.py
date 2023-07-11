@@ -380,10 +380,10 @@ for code, country in dict_country_code_name.items():
     dataframes.append(top_10_weeksdeaths)
 
 # Concatenate all DataFrames into a single DataFrame
-top_10_weekscases_df = pd.concat(dataframes)
+top_10_weeksdeaths_df = pd.concat(dataframes)
 
 # Reset the index
-top_10_weekscases_df.reset_index(drop=True, inplace=True)
+top_10_weeksdeaths_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ Top 10 weeks with most new deaths --")
 
@@ -530,19 +530,9 @@ top_15_vaccinations_rate_df = top_15_vaccinations_rate(data_vaccination, dict_is
 
 print("-- ✅ Top 15 countries with highest vaccination rate --")
 
-
-
-
-
-
-
-
-
-
-
-
-
-"""
+# q: can you give me the list of all the dataframes that have been created in the script above, as a list [] on a single line?
+# a: yes, here it is:
+# [new_cases_lastday_df, new_deaths_lastday_df, new_cases_last7day_df, new_cases_last7dayavr_df, new_deaths_last7day_df, new_deaths_last7dayavr_df, cum_caseslatest_df, cum_deathslatest_df, evol_casesalltime_df, evol_deathsalltime_df, evol_cumcases_df, evol_cumdeaths_df, new_casesweekly_df, new_deathsweekly_df, new_cases_weeklychange_df, new_deaths_weeklychange_df, top_10_weekscases_df, top_10_weeksdeaths_df, top_15_new_cases_lastweek_df, top_15_new_deaths_lastweek_df, top_15_total_death_incidence_df, total_vaccinationscountry_df, total_vaccinatedpeople_country_df, total_percvaccinated_country_df, vaccinations_changeevol_country_df, vaccinations_nbevol_country_df, vaccinations_monthly_country_df, top_15_vaccinations_rate_df]
 
 # 3. Push data to BigQuery database
 
@@ -554,10 +544,35 @@ project_id = 'your_project_id'
 
 # List of your dataframes and their corresponding table names
 dataframes = [
-    (new_cases_lastday_var, 'new_cases_lastday_var'),
-    (new_deaths_lastday_var, 'new_deaths_lastday_var'),
-    # ... add all your other dataframes here
-]
+    (new_cases_lastday_df, 'new_cases_lastday'),
+    (new_deaths_lastday_df, 'new_deaths_lastday'),
+    (new_cases_last7day_df, 'new_cases_last7day'),
+    (new_cases_last7dayavr_df, 'new_cases_last7dayavr'),
+    (new_deaths_last7day_df, 'new_deaths_last7day'),
+    (new_deaths_last7dayavr_df, 'new_deaths_last7dayavr'),
+    (cum_caseslatest_df, 'cum_caseslatest'),
+    (cum_deathslatest_df, 'cum_deathslatest'),
+    (evol_casesalltime_df, 'evol_casesalltime'),
+    (evol_deathsalltime_df, 'evol_deathsalltime'),
+    (evol_cumcases_df, 'evol_cumcases'),
+    (evol_cumdeaths_df, 'evol_cumdeaths'),
+    (new_casesweekly_df, 'new_casesweekly'),
+    (new_deathsweekly_df, 'new_deathsweekly'),
+    (new_cases_weeklychange_df, 'new_cases_weeklychange'),
+    (new_deaths_weeklychange_df, 'new_deaths_weeklychange'),
+    (top_10_weekscases_df, 'top_10_weekscases'),
+    (top_10_weeksdeaths_df, 'top_10_weeksdeaths'),
+    (top_15_new_cases_lastweek_df, 'top_15_new_cases_lastweek'),
+    (top_15_new_deaths_lastweek_df, 'top_15_new_deaths_lastweek'),
+    (top_15_total_death_incidence_df, 'top_15_total_death_incidence'),
+    (total_vaccinationscountry_df, 'total_vaccinationscountry'),
+    (total_vaccinatedpeople_country_df, 'total_vaccinatedpeople_country'),
+    (total_percvaccinated_country_df, 'total_percvaccinated_country'),
+    (vaccinations_changeevol_country_df, 'vaccinations_changeevol_country'),
+    (vaccinations_nbevol_country_df, 'vaccinations_nbevol_country'),
+    (vaccinations_monthly_country_df, 'vaccinations_monthly_country'),
+    (top_15_vaccinations_rate_df, 'top_15_vaccinations_rate')
+    ]
 
 # Push data to BigQuery
 for df, table_name in dataframes:
@@ -589,7 +604,3 @@ schema = pandas_gbq.schema.generate_bq_schema(dataframe)
 # Push the dataframe to BigQuery
 table_id = 'your-table-id'
 pandas_gbq.to_gbq(dataframe, f'{dataset_id}.{table_id}', project_id='your-project-id', if_exists='replace', table_schema=schema)
-
-
-
-"""
