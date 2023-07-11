@@ -457,7 +457,7 @@ print("-- ✅ Total number of vaccinated people per country --")
 dataframes = []
 
 for code, country in dict_isocode_countries.items():
-    total_percvaccinated_country = total_vaccinations_country(data_vaccination, country)
+    total_percvaccinated_country = total_vaccinations_rate_country(data_vaccination, country)
     dataframes.append(pd.DataFrame({"Country": [country], "Total_vaccinations": [total_percvaccinated_country]}))
 
 # Concatenate all the DataFrames in the list into a single DataFrame
@@ -492,15 +492,15 @@ dataframes = []
 
 for code, country in dict_isocode_countries.items():
     # Get the DataFrame for the current country
-    vaccinations_changeevol_country = vaccinations_change_evol_country(data_vaccination, country)
-    vaccinations_changeevol_country['Country'] = country
-    dataframes.append(vaccinations_changeevol_country)
+    vaccinations_nbevol_country = vaccinations_change_evol_country(data_vaccination, country)
+    vaccinations_nbevol_country['Country'] = country
+    dataframes.append(vaccinations_nbevol_country)
 
 # Concatenate all the DataFrames in the list into a single DataFrame
-vaccinations_changeevol_country_df = pd.concat(dataframes)
+vaccinations_nbevol_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
-vaccinations_changeevol_country_df.reset_index(inplace=True)
+vaccinations_nbevol_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (evolution / month) --")
 
