@@ -516,6 +516,7 @@ for code, country in dict_isocode_countries.items():
 vaccinations_monthly_country_df = pd.concat(dataframes)
 
 # Reset the index of the DataFrame
+vaccinations_monthly_country_df['total_vaccinations'] = vaccinations_monthly_country_df['total_vaccinations'].astype(float)
 vaccinations_monthly_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (monthly) --")
@@ -577,4 +578,4 @@ dataframes = [
 # Loop to push data to BigQuery
 for df, table_name in dataframes:
     pandas_gbq.to_gbq(df, f'{dataset_id}.{table_name}', project_id=project_id, if_exists='replace')
-    print(f'✅ Pushed{table_name} to {dataset_id}.{table_name}')
+    print(f'✅ Pushed {table_name} to {dataset_id}.{table_name}')
