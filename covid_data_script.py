@@ -540,8 +540,9 @@ print("-- ✅ Top 15 countries with highest vaccination rate --")
 key_path = "/path/to/your/service-account-key.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
 
-# Your Google Cloud project ID
+# Your Google Cloud project ID & dataset ID
 project_id = 'covid-dashboard-378011'
+dataset = "covid-dashboard-378011"
 
 # List of your dataframes and their corresponding table names
 dataframes = [
@@ -577,23 +578,4 @@ dataframes = [
 
 # Push data to BigQuery
 for df, table_name in dataframes:
-    df.to_gbq(f'your_dataset.{table_name}', project_id=project_id, if_exists='replace')
-
-
-# 3. Push data to BigQuery database
-
-
-# Create a BigQuery client
-
-# Create a dataset
-dataset_id = 'your-dataset-id'
-dataset_ref = client.dataset(dataset_id)
-dataset = bigquery.Dataset(dataset_ref)
-dataset = client.create_dataset(dataset)
-
-# Convert dataframe to BigQuery-compatible schema
-schema = pandas_gbq.schema.generate_bq_schema(dataframe)
-
-# Push the dataframe to BigQuery
-table_id = 'your-table-id'
-pandas_gbq.to_gbq(dataframe, f'{dataset_id}.{table_id}', project_id='your-project-id', if_exists='replace', table_schema=schema)
+    pandas_gbq.to_gbq(df, f'{dataset}.{table_name}', project_id=project_id, if_exists='replace')
