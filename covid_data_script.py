@@ -254,9 +254,8 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     evol_cumcases = evol_cum_cases(data_cases_deaths, country)
-    evol_cumcases_df = pd.DataFrame({"Evol_cumcases": [evol_cumcases], "Country": [country]})
-    evol_cumcases_df["Country"] = country
-    dataframes.append(evol_cumcases_df)
+    evol_cumcases["Country"] = country
+    dataframes.append(evol_cumcases)
 
 # Concatenate all DataFrames into a single DataFrame
 evol_cumcases_df = pd.concat(dataframes)
@@ -272,9 +271,8 @@ dataframes = []
 
 for code, country in dict_country_code_name.items():
     evol_cumdeaths = evol_cum_deaths(data_cases_deaths, country)
-    evol_cumdeaths_df = pd.DataFrame({"Evol_cumdeaths": [evol_cumdeaths], "Country": [country]})
-    evol_cumdeaths_df["Country"] = country
-    dataframes.append(evol_cumdeaths_df)
+    evol_cumdeaths["Country"] = country
+    dataframes.append(evol_cumdeaths)
 
 # Concatenate all DataFrames into a single DataFrame
 evol_cumdeaths_df = pd.concat(dataframes)
@@ -542,7 +540,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
 
 # Your Google Cloud project ID & dataset ID
 project_id = 'covid-dashboard-378011'
-dataset = "covid-dashboard-378011"
+dataset_id = "covid_data_script"
 
 # List of your dataframes and their corresponding table names
 dataframes = [
@@ -576,6 +574,7 @@ dataframes = [
     (top_15_vaccinations_rate_df, 'top_15_vaccinations_rate')
     ]
 
-# Push data to BigQuery
+# Loop to push data to BigQuery
 for df, table_name in dataframes:
-    pandas_gbq.to_gbq(df, f'{dataset}.{table_name}', project_id=project_id, if_exists='replace')
+    pandas_gbq.to_gbq(df, f'{dataset_id}.{table_name}', project_id=project_id, if_exists='replace')
+    print(f'✅ Pushed{table_name} to {dataset_id}.{table_name}')
