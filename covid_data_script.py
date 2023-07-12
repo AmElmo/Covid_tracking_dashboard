@@ -502,6 +502,8 @@ vaccinations_nbevol_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (evolution / month) --")
 
+# 👇 Causing issues with BigQuery upload, float64 issue to debug
+'''
 # Total nb of vaccinated people per country (monthly)
 
 dataframes = []
@@ -520,6 +522,9 @@ vaccinations_monthly_country_df['total_vaccinations'] = vaccinations_monthly_cou
 vaccinations_monthly_country_df.reset_index(inplace=True)
 
 print("-- ✅ Total nb of vaccinated people per country (monthly) --")
+
+'''
+
 
 ## Global level functions
 
@@ -571,7 +576,6 @@ dataframes = [
     (total_percvaccinated_country_df, 'total_percvaccinated_country'),
     (vaccinations_changeevol_country_df, 'vaccinations_changeevol_country'),
     (vaccinations_nbevol_country_df, 'vaccinations_nbevol_country'),
-    (vaccinations_monthly_country_df, 'vaccinations_monthly_country'),
     (top_15_vaccinations_rate_df, 'top_15_vaccinations_rate')
     ]
 
