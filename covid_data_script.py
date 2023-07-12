@@ -350,7 +350,6 @@ new_deaths_weeklychange_df.reset_index(drop=True, inplace=True)
 
 print("-- ✅ New deaths (weekly % change) --")
 
-
 # Top 10 weeks with most new cases
 
 dataframes = []
