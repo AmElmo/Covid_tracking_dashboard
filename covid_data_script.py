@@ -582,3 +582,5 @@ dataframes = [
 for df, table_name in dataframes:
     pandas_gbq.to_gbq(df, f'{dataset_id}.{table_name}', project_id=project_id, if_exists='replace')
     print(f'✅ Pushed {table_name} to {dataset_id}.{table_name}')
+
+print("👏 Script completed successfully 👏")
