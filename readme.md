@@ -66,12 +66,20 @@ A total of xxx functions were created across xxx packages.
 3. Metabase connects to the Bigquery database in order to generate the dashboards.
 
 
-## 4. 📊 Metabase setup
+## 4. 📊 Data visualization setup
 
 We use the following types of charts to display our insights:
 - ???
 - ???
 - ???
+
+Moving forward, you can set a dashboard that connects to BigQuery using two approaches:
+
+1. Paid but fast 👉 setup a Metabase instance using a service like Render. You will have to pay as Render free tier is not sufficient to host a Metabase instance. You will have to pay ~$25 / month to have your own instance on Render. You can also use Metabase cloud but that will be minimum $85 / month.
+
+2. Free but slow 👉 use Dash by Plotly to create your own custom dashboard. This is light so you can definitely host that on a Render instance using their free tier.
+
+I made a quick demo using Dash by Plotly so you see what it is capable of. It's a light dashboard and a lot more time could be spent in order to make it more comprehensive and prettier.
 
 
 **TODOs**
@@ -79,8 +87,8 @@ We use the following types of charts to display our insights:
 - ~~Add regional functions~~
 - ~~Fix all functions showing wrong data~~
 - ~~Push aggregated data to a BigQuery database~~
-- Write CRON job to fetch CSV data and run script to push to BigQuery
-- Setup Metabase to plug to BigQuery data source
-- Make dashboards in Metabase (~12 dashboards in total)
-- Publish Metabase data
+- ~~Write CRON job to fetch CSV data and run script to push to BigQuery~~
+- ~~Setup Metabase to plug to BigQuery data source~~
+- Make 12 plots in a Dash dashboard
+- Publish on Render
 - Finish the Readme
