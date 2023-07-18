@@ -555,7 +555,7 @@ def cron_job(request):
     # 3. Push data to BigQuery database
 
     # Authenticate with Google Cloud
-    key_path = "/path/to/your/service-account-key.json"
+    key_path = "/Users/julienberthomier/code/AmElmo/Main_Projects/Covid_tracking_dashboard/client_secret_59863169565-0g6psho3kj61kokqdsrqiao73m0o1i4q.apps.googleusercontent.com.json"
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
 
     # Your Google Cloud project ID & dataset ID

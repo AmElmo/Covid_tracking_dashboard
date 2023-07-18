@@ -3,3 +3,4 @@ numpy==1.21.0
 google-cloud-bigquery==2.26.0
 pandas-gbq==0.15.0
 requests==2.26.0
+google-api-python-client==2.20.0
