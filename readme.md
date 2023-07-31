@@ -89,6 +89,6 @@ I made a quick demo using Dash by Plotly so you see what it is capable of. It's 
 - ~~Push aggregated data to a BigQuery database~~
 - ~~Write CRON job to fetch CSV data and run script to push to BigQuery~~
 - ~~Setup Metabase to plug to BigQuery data source~~
-- Make 12 plots in a Dash dashboard
-- Publish on Render
+- Make 9 plots in a Dash dashboard
+- ~~Publish on Render~~
 - Finish the Readme
