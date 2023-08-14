@@ -9,7 +9,7 @@ Keeping track of Covid related data is painful. The raw data is provided by the 
 
 # 💡 Solution
 
-This project is scrapping the Covid data from the WHO data sources, crunching it to generate interesting insights and comparisons across countries (stored in a Bigquery database). Then displaying it on beautiful dashboards (using Metabase).
+This project is scrapping the Covid data from the WHO data sources, crunching it to generate interesting insights and comparisons across countries (stored in a Bigquery database). Then displaying it on beautiful dashboards (using Dash by Plotly).
 
 <img src="imgs/dashboard_covid.png" width="300" />
 
@@ -52,7 +52,7 @@ A total of xxx functions were created across xxx packages.
 
 ## 3. ⏳ Data flow
 
-1. We have a CRON job scheduled to pick up the two main csv files from the WHO website every single day at 12:00
+1. We have a CRON job scheduled to pick up the two main csv files from the WHO website every single day at 9:30 AM UTC every day from Monday to Friday.
 
 2. The different packages then run to generate the consolidated data. Each visualization source is under a separate database.
 
