@@ -5,20 +5,13 @@
 
 Keeping track of Covid related data is painful. The raw data is provided by the WHO (World Health Organization). It is a CSV with hundreds of thousands of rows and hundreds of columns. In order to gather insights, you'd have to do a lot of tedious excel work.
 
-<p float="left">
-  <img src="imgs/sign_language_1.png" width="300" />
-  <img src="imgs/sign_language_3.jpeg" width="250" />
-</p>
-
 <br/>
 
 # 💡 Solution
 
 This project is scrapping the Covid data from the WHO data sources, crunching it to generate interesting insights and comparisons across countries (stored in a Bigquery database). Then displaying it on beautiful dashboards (using Metabase).
 
- <img src="imgs/sign_language_2.png" width="360" />
-
- <img src="imgs/image3.gif" width="650" />
+<img src="imgs/dashboard_covid.png" width="300" />
 
 <br/>
 
@@ -59,19 +52,19 @@ A total of xxx functions were created across xxx packages.
 
 ## 3. ⏳ Data flow
 
-1. We have a CRON job scheduled to pick up the two main csv files from the WHO website every single day at xxx
+1. We have a CRON job scheduled to pick up the two main csv files from the WHO website every single day at 12:00
 
 2. The different packages then run to generate the consolidated data. Each visualization source is under a separate database.
 
-3. Metabase connects to the Bigquery database in order to generate the dashboards.
+3. We query the Bigquery database with SQL and display the data on a dashboard using the Dash by Plotly framework (served using Render)
 
 
 ## 4. 📊 Data visualization setup
 
 We use the following types of charts to display our insights:
-- ???
-- ???
-- ???
+- Line charts
+- Bar charts
+- Pie charts
 
 Moving forward, you can set a dashboard that connects to BigQuery using two approaches:
 
@@ -79,16 +72,13 @@ Moving forward, you can set a dashboard that connects to BigQuery using two appr
 
 2. Free but slow 👉 use Dash by Plotly to create your own custom dashboard. This is light so you can definitely host that on a Render instance using their free tier.
 
-I made a quick demo using Dash by Plotly so you see what it is capable of. It's a light dashboard and a lot more time could be spent in order to make it more comprehensive and prettier.
+I made a quick demo using Dash by Plotly so you see what it is capable of. It's a light dashboard and a lot more time could be spent in order to make it more comprehensive and prettier looking.
 
+## Conclusion
 
-**TODOs**
-- ~~Review all data aggregation functions~~
-- ~~Add regional functions~~
-- ~~Fix all functions showing wrong data~~
-- ~~Push aggregated data to a BigQuery database~~
-- ~~Write CRON job to fetch CSV data and run script to push to BigQuery~~
-- ~~Setup Metabase to plug to BigQuery data source~~
-- Make 9 plots in a Dash dashboard
-- ~~Publish on Render~~
-- Finish the Readme
+Overall, this project can be used as a boiler plate for the following flow:
+1. Picking data from a CSV on any website using a CRON job in the cloud (Google Cloud Scheduler)
+2. Apply a bunch of data preprocessing steps using Python scripts
+3. Push the resulting Panda dataframes to a Bigquery database
+4. Query the data with SQL
+5. Display it on a web page using Dash by Plotly
